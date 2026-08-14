@@ -1,0 +1,324 @@
+/* ============================================================
+   JB PORTFOLIO / base.css
+   tokens, reset, HUD chrome, cursor, grain, tickers, shared bits
+   ============================================================ */
+
+:root {
+  /* ---- LIGHT THEME (default) ----
+     --ink = page background, --bone = primary text (roles kept; values flip).
+     --acid is the interactive accent; --*-rgb channels let translucent
+     colors flip with the theme. Dark palette preserved below for a toggle. */
+  /* Matched to the hero clip's backdrop so its edges disappear into the page.
+     Sampled by drawing the <video> to a canvas and reading the pixels, NOT
+     from an ffmpeg-exported still, which decodes colour range differently and
+     came out 3 units darker, enough to leave a visible rectangle. */
+  --ink: #eae1d5;
+  --ink-2: #f4efe6;        /* raised surface / cards: same warm hue, lighter */
+  /* charcoal, not black: ~9.7:1 here instead of pure black's ~16:1, so the
+     page reads soft rather than glaring while staying well past AA */
+  --bone: #333333;
+  --bone-rgb: 51, 51, 51;
+  --acid: #1550f0;         /* electric-blue accent (reads on light) */
+  --acid-rgb: 21, 80, 240;
+  --hud-blue: #1550f0;
+  --coral: #ff4d29;
+  /* 0.74 (not 0.68): the warmer, darker canvas eats contrast, and 0.68 put
+     secondary text at ~4.1:1 here, below AA. 0.74 restores ~4.8:1. */
+  --dim: rgba(var(--bone-rgb), 0.74);
+  --hairline: rgba(var(--bone-rgb), 0.14);
+  --display: "Bricolage Grotesque", sans-serif;
+  --body: "Archivo", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --hud-pad: clamp(14px, 2.2vw, 28px);
+}
+
+:root[data-theme="dark"] {
+  --ink: #0c0c0f;
+  --ink-2: #121218;
+  --bone: #f2efe6;
+  --bone-rgb: 242, 239, 230;
+  --acid: #d8ff3e;
+  --acid-rgb: 216, 255, 62;
+  --hud-blue: #5cb2ff;
+  --dim: rgba(var(--bone-rgb), 0.45);
+  --hairline: rgba(var(--bone-rgb), 0.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* NOTE: no CSS scroll-behavior:smooth here, it fights GSAP ScrollTrigger
+   pinning on fast scrolls (stuck pins). In-page anchors smooth-scroll via JS. */
+
+body {
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--acid); color: var(--ink); }
+
+img, svg, video, iframe { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dim { color: var(--dim); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Outline text CSS fallback (no-JS only). -webkit-text-stroke has a real,
+   persistent WebKit/Blink bug on complex/concave glyphs (E, Q) where the
+   stroke's offset-path fails to union or closes incompletely, and no amount of
+   color/fill-mode tuning fixes it reliably. js/main.js replaces this text
+   with real SVG stroke (proper vector path stroking, immune to the bug);
+   this rule only matters if JS fails to run. */
+.outline {
+  color: var(--bone);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--bone);
+}
+.outline svg { overflow: visible; }
+/* This font builds some glyphs (notably E) from several OVERLAPPING subpaths.
+   Filled, they merge invisibly; stroked with fill:none, every subpath's own
+   outline shows, which is why the E read as a spine plus three boxed bars.
+   Fix: paint the stroke FIRST, then lay an opaque fill over it. The fill is
+   the union of those subpaths, so it hides all the interior seams and leaves
+   only the outer contour: a clean, single hollow letter.
+   The fill therefore has to match the page background (--ink). It covers the
+   stroke's inner half, so stroke-width is doubled to 4px to keep the visible
+   band at the intended 2px. NOTE: if the hero ever gets a strongly patterned
+   or photographic background, this flat fill would become visible. */
+.outline svg text {
+  paint-order: stroke;
+  fill: var(--ink);
+  stroke: var(--bone);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* ---------- camera HUD ---------- */
+.hud { position: fixed; inset: 0; pointer-events: none; z-index: 60; }
+
+.hud-corner {
+  position: absolute;
+  width: 26px; height: 26px;
+  border: 2px solid var(--hud-blue);
+  opacity: 0.9;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              border-width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* corners glow slightly while locked onto a hovered element */
+.hud.is-framing .hud-corner {
+  filter: drop-shadow(0 0 6px var(--hud-blue));
+}
+/* each bracket scales about its OWN corner (the point that touches the
+   framed element), so JS can shrink them for small targets like the nav
+   tabs without the anchor drifting */
+.hud-corner.tl { top: var(--hud-pad); left: var(--hud-pad); border-right: 0; border-bottom: 0; transform-origin: top left; }
+.hud-corner.tr { top: var(--hud-pad); right: var(--hud-pad); border-left: 0; border-bottom: 0; transform-origin: top right; }
+.hud-corner.bl { bottom: var(--hud-pad); left: var(--hud-pad); border-right: 0; border-top: 0; transform-origin: bottom left; }
+.hud-corner.br { bottom: var(--hud-pad); right: var(--hud-pad); border-left: 0; border-top: 0; transform-origin: bottom right; }
+
+.hud-item { position: absolute; color: var(--bone); opacity: 0.85; }
+.hud-tl { top: calc(var(--hud-pad) + 4px); left: calc(var(--hud-pad) + 38px); }
+.hud-tr { top: calc(var(--hud-pad) + 4px); right: calc(var(--hud-pad) + 38px); }
+.hud-bl { bottom: calc(var(--hud-pad) + 4px); left: calc(var(--hud-pad) + 38px); }
+.hud-br { bottom: calc(var(--hud-pad) + 4px); right: calc(var(--hud-pad) + 38px); }
+
+#timecode { color: var(--hud-blue); }
+
+@media (max-width: 720px) {
+  .hud-bl, .hud-br { display: none; }
+  .hud-tl { display: none; }
+}
+
+/* ---------- scene nav: rounded-rect tabs, centered top (desktop);
+   hamburger + dropdown panel (mobile) ---------- */
+.scene-nav {
+  position: fixed;
+  top: var(--hud-pad);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 65;
+}
+
+/* desktop: no container chrome. The tabs are free-standing text, and the
+   viewfinder brackets are what outlines them on hover. The generous gap
+   leaves room for those brackets to sit outside a tab without colliding
+   with its neighbours. */
+.scene-nav-tabs {
+  display: flex;
+  gap: clamp(16px, 1.8vw, 26px);
+}
+
+.scene-nav-tab {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 7px 4px;   /* hit area only, no visible box */
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+.scene-nav-tab:hover { color: var(--bone); }
+/* active state is colour-only, to stay consistent with the no-chrome look */
+.scene-nav-tab.is-active { color: var(--acid); }
+
+/* mobile: hamburger toggle + dropdown panel */
+.scene-nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 42px; height: 42px;
+  background: rgba(var(--bone-rgb), 0.06);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+.scene-nav-toggle span {
+  display: block; width: 16px; height: 1.5px;
+  background: var(--bone);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.scene-nav-toggle.is-open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.scene-nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.scene-nav-toggle.is-open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  /* hamburger anchors top-LEFT, clearing the corner viewfinder bracket */
+  .scene-nav {
+    left: calc(var(--hud-pad) + 32px);
+    transform: none;
+  }
+  .scene-nav-toggle { display: flex; }
+  /* the dropdown DOES need panel chrome (it floats over content), so the
+     background/blur removed from the desktop rule is restored here */
+  .scene-nav-tabs {
+    position: fixed;
+    top: calc(var(--hud-pad) + 50px);
+    left: calc(var(--hud-pad) + 32px);
+    flex-direction: column;
+    gap: 2px;
+    width: min(70vw, 240px);
+    background: rgba(var(--bone-rgb), 0.06);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .scene-nav-tabs.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .scene-nav-tab { text-align: left; padding: 11px 14px; border-radius: 10px; }
+}
+
+/* NOTE: the custom ring cursor was removed, the native pointer is back.
+   The data-cursor="…" attributes left on links/buttons are inert; they're
+   kept only so the effect could be restored without re-tagging everything. */
+
+/* ---------- grain ---------- */
+.grain {
+  position: fixed; inset: -50%;
+  z-index: 55; pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1.5%); }
+  50% { transform: translate(1.5%, -2%); }
+  75% { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---------- tickers ---------- */
+.ticker { overflow: hidden; white-space: nowrap; }
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 26s linear infinite;
+  font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+  color: var(--dim);
+}
+.ticker-track.reverse { animation-direction: reverse; }
+.ticker-track span { padding-right: 0.5em; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ---------- scene scaffolding ---------- */
+.scene {
+  position: relative;
+  padding: clamp(90px, 14vh, 160px) clamp(20px, 6vw, 90px);
+}
+
+.scene-title {
+  font-family: var(--display);
+  font-weight: 750;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(36px, 6vh, 72px);
+  display: flex; align-items: baseline; gap: 0.4em;
+}
+.scene-num {
+  color: var(--acid);
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+  transform: translateY(-0.6em);
+}
+
+/* reveal helper (JS toggles .in) */
+.reveal { opacity: 0; transform: translateY(40px); }
+.reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- mobile scaffolding: tighter rhythm so sections aren't buried
+   under desktop-scale whitespace, and headings actually fit ---------- */
+@media (max-width: 720px) {
+  .scene { padding: 72px 20px; }
+  .scene-title {
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    margin-bottom: 24px;
+  }
+  .scene-num { font-size: 0.7rem; }
+  /* keep long words from forcing horizontal overflow on narrow screens */
+  h1, h2, h3, p { overflow-wrap: break-word; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .grain { animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

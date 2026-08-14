@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BigBattery: Curing Analysis Paralysis | Joshua Bojorquez</title>
+  <meta name="description" content="Curing analysis paralysis on a 180-page battery catalogue: 30 outcome-led pages so non-expert buyers could qualify themselves. +75% organic traffic, +28% product page conversion, checkout abandonment down from 70% to 40%.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/project.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230c0c0f'/><polygon points='35,25 75,50 35,75' fill='%23D8FF3E'/></svg>">
+</head>
+<body>
+
+  <div class="hud" aria-hidden="true">
+    <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+    <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+    <div class="hud-item hud-tl mono">JB / CASE FILE</div>
+    <div class="hud-item hud-tr mono">TC <span id="timecode">00:00:00:00</span></div>
+    <div class="hud-item hud-bl mono">CLIP 01 · CURING ANALYSIS PARALYSIS</div>
+    <div class="hud-item hud-br mono">SCROLL = SCRUB ▼</div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="playhead" aria-hidden="true"><div class="playhead-fill" id="playhead-fill"></div></div>
+
+  <main class="case">
+    <a class="back-link" href="../index.html" data-cursor="BACK">← BACK TO TIMELINE</a>
+
+    <span class="mono case-num">CLIP 01 / CASE FILE</span>
+    <h1 class="case-title">Curing Analysis<br>Paralysis</h1>
+    <p class="case-standfirst">Product &amp; Brand Designer at BigBattery, 2025 to present.
+      Six energy verticals, two very different buyers, one storefront.</p>
+    <div class="case-tags">
+      <span>Information Architecture</span><span>UX Research</span><span>Design System</span>
+      <span>Conversion Optimization</span><span>Figma</span><span>Hotjar</span><span>HYROS</span>
+    </div>
+
+    <div class="case-media" data-cursor="PLAY">
+      <!-- ▶ SWAP: drop in before/after screens, a Figma embed, or a walkthrough clip -->
+      <div class="media-placeholder">
+        <p class="mono">BEFORE / AFTER · PLACEHOLDER</p>
+        <p class="mono dim">paste product page screens or a Figma embed here</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2>The Brief</h2>
+      <p>BigBattery sells lithium storage into six verticals at once: residential, commercial,
+         marine, RV, golf and off-grid. Half the buyers are electricians who want a spec sheet.
+         The other half have never sized a battery bank in their life. The catalogue had grown to
+         <strong>180 product pages</strong> serving both, and it was buckling under itself.</p>
+      <p>Capacity variants each had their own page, so eight listings competed for the same search
+         term and diluted the authority of all eight. Product pages bounced at
+         <strong>53.3%</strong>. Seven in ten carts were abandoned at the final step. In an
+         850-person survey, 44% could not find the product they wanted and 47% could not
+         understand the one they found. Across session recordings, sales call logs and survey
+         responses, the same sentence kept surfacing: <em>I can't tell which battery is right
+         for my system.</em></p>
+      <p>That is not a copy problem. A buyer who cannot self-qualify either calls the sales team
+         or leaves, and most leave.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>Phase 01 / Find the real failure</h2>
+      <p>I wanted the diagnosis to come from behaviour, not opinion, so I triangulated four
+         sources before touching a wireframe.</p>
+      <ul>
+        <li><strong>931 Hotjar sessions.</strong> Recordings showed a consistent shape: land,
+            scroll straight past the spec table, never reach a CTA.</li>
+        <li><strong>850-respondent survey</strong>, mixed methods, splitting "couldn't find it"
+            (44%) from "couldn't understand it" (47%), which are two different fixes.</li>
+        <li><strong>Stakeholder interviews</strong> with the CEO and the sales team, who named
+            checkout confusion as the top driver of inbound support calls.</li>
+        <li><strong>Competitive teardown</strong>, which found the pattern we were missing:
+            discovery organised by application rather than by product family, with specs
+            progressively disclosed instead of front-loaded.</li>
+      </ul>
+      <p>The conclusion was that the site was organised around BigBattery's internal taxonomy
+         and a buyer's mental model starts somewhere else entirely: with the job.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>Phase 02 / Collapse the catalogue</h2>
+      <p>Consolidation came first, because every later decision multiplied across however many
+         pages existed. <strong>180 pages became 30.</strong> Capacity variants that had each held
+         their own URL folded into a single parent page with a quantity selector, which turned a
+         multi-tab comparison into an on-page one and pointed all that scattered SEO authority at
+         one target.</p>
+      <p>Navigation was rebuilt around application entry points rather than internal categories,
+         and product families gained dual-application tagging after testing surfaced a real gap:
+         hardware suited to both grid-tied and off-grid use was invisible in either single-category
+         search.</p>
+      <p>The configuration model took six passes to land. V1 through V5 worked through an inverter
+         selector, a combined battery-and-inverter page, grid and off-grid segmentation, and a
+         restructured below-fold, before V6 shipped in December 2025 carrying multiple inverter and
+         battery configurations on one parent page.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>Phase 03 / Lead with the outcome, not the spec</h2>
+      <p>Every page was re-sequenced to open with what the product is <em>for</em> ("for off-grid
+         homes", "for solar backup") and to release technical depth on demand. Specs moved below
+         the fold in a scannable structure, so experts can still get to them in one scroll while a
+         first-time buyer is not asked to interpret a voltage table to qualify themselves.</p>
+      <p>The trade-off was immediate: technical buyers genuinely preferred specs at the top. I
+         resolved it with a persistent spec summary bar, so the numbers stay reachable while the
+         page still leads with the outcome.</p>
+      <p>The area below the fold became a decision engine in five layers: visual explanations and
+         infographics rather than walls of text, installation and real-use video, downloadable spec
+         sheets and wiring diagrams, side-by-side comparison tables, and warranty and policy
+         surfaced instead of buried in a footer. Trust signals moved up next to the add-to-cart, on
+         the argument that a battery is a high-consideration purchase and warranty, compatibility
+         and shipping are pre-purchase anxieties, not post-purchase details. Only the three
+         highest-converting signals made the cut, since each one costs visual clarity.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>Phase 04 / Build a system, not more pages</h2>
+      <p>Every new page had previously been designed from scratch, which produced visual
+         inconsistency that quietly undermined trust and slowed development to a crawl. I built a
+         shared library instead: product cards in grid, list and comparison variants; an
+         application-led mega menu; spec tables that collapse on mobile; trust strips; a
+         three-tier CTA hierarchy; and use-case modules.</p>
+      <p>It shipped as documentation rather than a folder of frames: Figma variables so a global
+         change cascades, autolayout and responsive behaviour spelled out, dev-ready links,
+         interaction specs, and the usage context for each component. Foundations covered brand
+         guidelines, type scales, spacing tokens, grid rules and component states.</p>
+      <p>The same logic drove the visual work. Energy products share a structure, so rather than
+         drawing one-off graphics I built modular infographic templates: system diagrams tracing
+         panel to controller to battery to inverter to load, capacity comparisons showing what a
+         given bank actually runs and for how long, and per-vertical use-case scenarios. That came
+         to <strong>42+ assets</strong> deployed across product pages, landing pages, Meta and
+         Google creative, and Klaviyo lifecycle email, with one system feeding every channel.</p>
+      <p>Selling this internally meant dropping the UX vocabulary. A component library does not
+         make any single page visibly better, so the case was made in development hours saved and
+         pages shipped per sprint.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>Phase 05 / Ship, measure, repeat</h2>
+      <p>Weekly reviews with the CEO and CTO kept every decision framed in conversion and revenue
+         terms rather than design principle. Post-launch, HYROS carried attribution while Hotjar
+         carried behaviour, and the loop stayed open rather than closing at launch.</p>
+      <p>It kept earning its keep. Heatmaps caught rage clicks on infographic banners, because
+         users expected them to be clickable, so they got hover states and CTA overlays. Post-redesign
+         checkout recordings showed users completing without the hesitation loops that had defined
+         the old flow, and full journeys from homepage banner through deals page, product page,
+         cart and checkout were confirmed completing as designed.</p>
+    </section>
+
+    <section class="case-section">
+      <h2>The Results</h2>
+      <div class="case-results">
+        <div class="r"><b>180 → 30</b><span>Product pages, an 81% reduction</span></div>
+        <div class="r"><b>+75%</b><span>Organic traffic after consolidation</span></div>
+        <div class="r"><b>+28%</b><span>Product page conversion, HYROS verified</span></div>
+        <div class="r"><b>70% → 40%</b><span>Checkout abandonment</span></div>
+        <div class="r"><b>+125%</b><span>Completed order growth</span></div>
+        <div class="r"><b>+68%</b><span>Product discovery metrics</span></div>
+        <div class="r"><b>+34%</b><span>Time on page, complex system pages</span></div>
+        <div class="r"><b>−21%</b><span>Bounce rate on visual-system landing pages</span></div>
+        <div class="r"><b>+18%</b><span>Ad CTR on infographic-led creative</span></div>
+        <div class="r"><b>+25%</b><span>Email open-to-click via Klaviyo</span></div>
+        <div class="r"><b>+18%</b><span>Average order value</span></div>
+        <div class="r"><b>+22%</b><span>Customer lifetime value</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Afterwards</h2>
+      <p>The catalogue work opened onto a post-purchase problem. Husky 2, a Bluetooth companion
+         app for LiFePO4 systems, answers the question owners were calling support to ask: is my
+         system healthy right now. It reports state of charge, voltage, current draw and
+         temperature, with per-cell voltage across all 16 cells and five discrete temperature
+         sensors for anyone who wants that depth.</p>
+      <p>Two decisions carried the design. It reports time rather than percentage, since "full in
+         15 min" is actionable in a way that "75%" is not, and it works over Bluetooth alone,
+         because the off-grid and marine users who need it most have no Wi-Fi to depend on.
+         Multi-battery setups are addressed by Module IDs over CAN and RS485, which doubles as the
+         upsell path into a larger system.</p>
+      <p>If I were extending this, two things deserve more than they got: structured testing with
+         B2B buyers specifically, whose decision cycles are longer and more consultative than the
+         survey captured, and deeper design-system documentation, which is functional today but
+         could be a genuine accelerant with real investment.</p>
+    </section>
+
+    <a class="case-next" href="launch-velocity.html" data-cursor="NEXT">
+      <span class="mono">NEXT CLIP →</span>
+      <h3>Launch Velocity</h3>
+    </a>
+
+    <footer class="case-footer">
+      <span>© 2026 JOSHUA BOJORQUEZ</span><span>CASE FILE 01 / 03</span>
+    </footer>
+  </main>
+
+  <script src="../js/project.js"></script>
+</body>
+</html>

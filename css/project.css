@@ -1,0 +1,150 @@
+/* ============================================================
+   JB PORTFOLIO / project.css (case-study pages)
+   ============================================================ */
+
+.case { max-width: 1100px; margin: 0 auto; padding: clamp(110px, 16vh, 170px) clamp(20px, 5vw, 60px) 60px; }
+
+.back-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  margin-bottom: clamp(40px, 7vh, 70px);
+  transition: color 0.25s ease;
+}
+.back-link:hover { color: var(--acid); }
+
+.case-num { color: var(--acid); display: block; margin-bottom: 14px; }
+
+.case-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
+
+/* one line of framing under the title: role, dates, scope */
+.case-standfirst {
+  max-width: 54ch;
+  margin: -0.6rem 0 1.6rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.5;
+  color: rgba(var(--bone-rgb), 0.72);
+}
+
+.case-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: clamp(40px, 7vh, 70px); }
+.case-tags span {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border: 1px solid var(--hairline);
+  color: var(--dim);
+}
+
+/* media slot */
+.case-media {
+  border: 1px solid var(--hairline);
+  background: var(--ink-2);
+  margin-bottom: clamp(50px, 9vh, 90px);
+}
+.case-media iframe, .case-media video { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.media-placeholder {
+  aspect-ratio: 16 / 9;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 24px, rgba(var(--bone-rgb), 0.025) 24px 48px),
+    var(--ink-2);
+  color: var(--dim);
+}
+
+/* content blocks */
+.case-section { margin-bottom: clamp(50px, 9vh, 90px); }
+.case-section h2 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 1.4rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+.case-section p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(var(--bone-rgb), 0.82);
+  max-width: 62ch;
+  margin-bottom: 1.2rem;
+}
+.case-section ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.case-section li {
+  padding-left: 26px; position: relative;
+  color: rgba(var(--bone-rgb), 0.78);
+}
+.case-section li::before {
+  content: "▸"; position: absolute; left: 0; color: var(--acid);
+}
+
+/* results grid */
+.case-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.case-results .r {
+  background: var(--ink);
+  padding: clamp(22px, 3vw, 38px);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.case-results .r b {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  line-height: 1;
+  color: var(--acid);
+}
+.case-results .r span {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* next project */
+.case-next {
+  display: block;
+  border: 1px solid var(--hairline);
+  padding: clamp(28px, 4vw, 48px);
+  margin-top: clamp(60px, 10vh, 110px);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.case-next:hover { border-color: var(--acid); background: var(--ink-2); }
+.case-next .mono { color: var(--dim); }
+.case-next h3 {
+  font-family: var(--display);
+  font-weight: 750;
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.case-footer {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  padding-top: 20px; margin-top: 60px;
+  border-top: 1px solid var(--hairline);
+}

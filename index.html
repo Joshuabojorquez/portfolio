@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua Bojorquez | Motion Design & AI-Assisted Video</title>
+  <meta name="description" content="Joshua Bojorquez: motion design, video marketing, and AI-assisted commercial production. UX designer & web project manager. Portfolio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230c0c0f'/><polygon points='35,25 75,50 35,75' fill='%23D8FF3E'/></svg>">
+</head>
+<body>
+
+  <!-- ===== CAMERA HUD (fixed viewfinder chrome) ===== -->
+  <div class="hud" aria-hidden="true">
+    <div class="hud-corner tl"></div>
+    <div class="hud-corner tr"></div>
+    <div class="hud-corner bl"></div>
+    <div class="hud-corner br"></div>
+    <div class="hud-item hud-tl mono">JB / PORTFOLIO_2026</div>
+    <div class="hud-item hud-tr mono">TC <span id="timecode">00:00:00:00</span></div>
+    <div class="hud-item hud-bl mono" id="scene-marker">SCENE 01 · COLD OPEN</div>
+    <div class="hud-item hud-br mono">SCROLL = SCRUB ▼</div>
+  </div>
+
+  <!-- grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- scene navigation: rounded-rect tabs (desktop) / hamburger (mobile) -->
+  <nav class="scene-nav" aria-label="Section navigation">
+    <button class="scene-nav-toggle" id="scene-nav-toggle" aria-label="Open menu" aria-expanded="false" data-cursor="MENU">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="scene-nav-tabs" id="scene-nav-tabs">
+      <a href="#scene-hero" class="scene-nav-tab mono" data-target="scene-hero" data-cursor="GO" data-hud-frame>INTRO</a>
+      <a href="#scene-reel" class="scene-nav-tab mono" data-target="scene-reel" data-cursor="GO" data-hud-frame>WORK</a>
+      <a href="#scene-about" class="scene-nav-tab mono" data-target="scene-about" data-cursor="GO" data-hud-frame>ABOUT</a>
+      <a href="#scene-work" class="scene-nav-tab mono" data-target="scene-work" data-cursor="GO" data-hud-frame>CASE STUDIES</a>
+      <a href="#scene-pipeline" class="scene-nav-tab mono" data-target="scene-pipeline" data-cursor="GO" data-hud-frame>PROCESS</a>
+      <a href="#scene-numbers" class="scene-nav-tab mono" data-target="scene-numbers" data-cursor="GO" data-hud-frame>RESULTS</a>
+      <a href="#scene-contact" class="scene-nav-tab mono" data-target="scene-contact" data-cursor="GO" data-hud-frame>CONTACT</a>
+    </div>
+  </nav>
+
+  <main id="timeline">
+
+    <!-- ===== SCENE 01 : HERO ===== -->
+    <section class="scene hero" id="scene-hero" data-scene="SCENE 01 · COLD OPEN">
+      <!--
+        Full-bleed backdrop video. JS (main.js) sets .src from the data-src-*
+        attributes below, picking wide vs tall by orientation so only ONE file
+        ever downloads. Drop your renders in as:
+          assets/hero-wide.mp4  →  16:9, character right, left kept clear
+          assets/hero-tall.mp4  →  9:16, character bottom ~40%
+        Backdrop tone must match --ink so the frame stays invisible.
+        No `loop`/`autoplay`: it holds on frame 1 and plays once when the
+        pinned hero sequence starts (see main.js).
+      -->
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-media-video"
+               data-src-wide="assets/hero-wide.mp4"
+               data-src-tall="assets/hero-wide.mp4"
+               muted playsinline preload="auto"></video>
+      </div>
+      <!-- fades up and out as the pinned sequence advances -->
+      <div class="hero-grid">
+        <div class="hero-text hero-upper">
+          <p class="hero-greeting">Hi, I'm</p>
+          <h1 class="hero-name">
+            <span class="line line-1"><span class="word">JOSHUA</span></span>
+            <span class="line line-2"><span class="word outline">BOJORQUEZ</span></span>
+          </h1>
+          <p class="hero-tagline">I'm an end-to-end product designer for AI and ecommerce
+            sites, taking work from user research through to high-fidelity shipped
+            design and systems.</p>
+          <!-- last thing to arrive: prompts the first scroll, and advances a stop
+               when clicked (see main.js) -->
+          <button class="hero-cue mono" id="hero-cue">
+            Scroll for skillset
+            <span class="hero-cue-arrow" aria-hidden="true">↓</span>
+          </button>
+        </div>
+      </div>
+      <!-- settles bottom-left and fades in as the icons arrive on screen -->
+      <div class="hero-lower">
+        <!-- mini toolkit: cycles the four discipline groups. Rows are built
+             by JS from KIT_GROUPS in main.js, edit the skills there. -->
+        <div class="hero-kit">
+          <p class="hero-kit-title">My skillset includes:</p>
+          <!-- one labelled icon per group: the selector, and it fills the space
+               the name vacates. Buttons, SVGs and labels come from KIT_GROUPS. -->
+          <div class="hero-kit-tabs" id="hero-kit-tabs" role="tablist" aria-label="Toolkit"></div>
+          <ul class="hero-kit-list" id="hero-kit-list" aria-live="polite"></ul>
+        </div>
+        <p class="hero-sub">Motion design · Video marketing · AI-assisted production.
+          I make brands move: cinematic spots, scroll-stopping campaigns, and
+          conversion-driven design, produced with an AI pipeline that ships
+          broadcast-quality work at indie speed.</p>
+        <button class="hero-play" id="hero-play" aria-label="Roll the tape: jump to My Recent Works" data-cursor="PLAY">
+          <span class="hero-play-btn" aria-hidden="true"></span>
+          <span class="mono hero-play-label">ROLL THE TAPE</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== SCENE 02 : MY RECENT WORKS (3D coverflow carousel) ===== -->
+    <!--
+      ▶ EDIT THE REEL: cards are built by JS from the REEL_CLIPS list in
+      js/main.js, add/remove/reorder clips there. Each entry is
+      { src, aspect: "tall"|"wide", tag, href, stats }. Drop new .mp4s in /assets.
+      Per-clip numbers live in that same list.
+    -->
+    <section class="scene footage-scene" id="scene-reel" data-scene="SCENE 02 · MY RECENT WORKS">
+      <div class="footage-head">
+        <h2 class="scene-title"><span class="mono scene-num">02</span> MY RECENT WORKS</h2>
+      </div>
+      <div class="reel" id="reel">
+        <button class="reel-nav prev" id="reel-prev" aria-label="Previous clip" data-cursor="PREV">‹</button>
+        <div class="reel-viewport">
+          <div class="reel-stage" id="reel-stage" aria-roledescription="carousel"></div>
+        </div>
+        <button class="reel-nav next" id="reel-next" aria-label="Next clip" data-cursor="NEXT">›</button>
+      </div>
+      <div class="reel-caption mono" id="reel-caption"></div>
+      <!-- the active clip's numbers, so the performance sits with the work
+           rather than in a section of its own. Built by JS from REEL_CLIPS. -->
+      <div class="reel-stats" id="reel-stats" aria-live="polite"></div>
+      <div class="reel-dots" id="reel-dots"></div>
+    </section>
+
+    <!-- ===== SCENE 03 : ABOUT ===== -->
+    <section class="scene about" id="scene-about" data-scene="SCENE 03 · BTS">
+      <h2 class="scene-title"><span class="mono scene-num">03</span> BEHIND THE SCENES</h2>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>I'm Joshua, a Google-certified UX designer turned web project manager
+             turned AI-assisted commercial producer. By day I lead cross-functional
+             teams shipping high-performing e-commerce experiences; by night I direct
+             cinematic product spots with an AI production pipeline I built myself.</p>
+          <p>The throughline: <strong>motion that sells.</strong> Whether it's a
+             landing page, a launch campaign, or a 15-second spot, I design for the
+             moment attention is won or lost.</p>
+          <p class="mono about-loc">📍 CADDO MILLS, TX · OPEN TO RELOCATION</p>
+          <!-- first call to action on the page -->
+          <div class="about-cta">
+            <a class="btn btn-primary mono" href="mailto:Joshuarbojorquez@gmail.com?subject=Let%27s%20work%20together">
+              GET IN TOUCH
+            </a>
+            <a class="btn btn-ghost mono" href="assets/Joshua-Bojorquez-Resume.pdf" download>
+              DOWNLOAD RÉSUMÉ ↓
+            </a>
+          </div>
+        </div>
+        <div class="about-facts mono">
+          <span>B.S. INFORMATICS / UX · ANDREWS UNIVERSITY</span>
+          <span>GOOGLE UX DESIGN CERTIFIED</span>
+          <span>WEB PROJECT MANAGER @ BIGBATTERY</span>
+          <span>BILINGUAL EN / ES</span>
+        </div>
+      </div>
+      <div class="skill-marquees" aria-hidden="true">
+        <div class="ticker skills-a"><div class="ticker-track mono">
+          <span>DAVINCI RESOLVE · FINAL CUT PRO X · HIGGSFIELD · CLAUDE · FIGMA · SOUND DESIGN · </span>
+          <span>DAVINCI RESOLVE · FINAL CUT PRO X · HIGGSFIELD · CLAUDE · FIGMA · SOUND DESIGN · </span>
+        </div></div>
+        <div class="ticker skills-b"><div class="ticker-track mono reverse">
+          <span>UX RESEARCH · PROTOTYPING · CRO · TECHNICAL SEO · CORE WEB VITALS · WORDPRESS · SPRINT PLANNING · </span>
+          <span>UX RESEARCH · PROTOTYPING · CRO · TECHNICAL SEO · CORE WEB VITALS · WORDPRESS · SPRINT PLANNING · </span>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== SCENE 04 : CASE STUDIES (horizontal carousel, drag/scroll, matches MY RECENT WORKS) ===== -->
+    <section class="scene work" id="scene-work" data-scene="SCENE 04 · CASE STUDIES">
+      <div class="footage-head">
+        <h2 class="scene-title"><span class="mono scene-num">04</span> CASE STUDIES</h2>
+        <span class="mono footage-hint">◄ DRAG / SCROLL ►</span>
+      </div>
+      <p class="work-sub">UX/UI documentation & measured results from the last few years.
+         Open a case file for the full process.</p>
+      <div class="work-track" id="work-track">
+
+          <a class="clip" href="projects/bigbattery.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-a"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 01</span>
+              <h3>BigBattery: Curing Analysis Paralysis</h3>
+              <p>Consolidating a sprawling battery catalogue into 30 outcome-led pages so
+                 non-expert buyers could qualify themselves.</p>
+              <span class="mono clip-stat">+75% ORGANIC TRAFFIC · +28% PAGE CONVERSION</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <a class="clip" href="projects/launch-velocity.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-b"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 02</span>
+              <h3>Launch Velocity</h3>
+              <p>Product-launch video content & ad campaigns for BigBattery's
+                 solar and golf-cart lines.</p>
+              <span class="mono clip-stat">535K+ VIEWS · $457K PIPELINE GROWTH</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <a class="clip" href="projects/convert-the-current.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-c"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 03</span>
+              <h3>Convert the Current</h3>
+              <p>Conversion-focused UX across homepage & key landing pages:
+                 research, prototyping, sprint delivery.</p>
+              <span class="mono clip-stat">+77% YoY Q4 REVENUE · $2M+ ATTRIBUTABLE</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <div class="clip clip-empty">
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 04</span>
+              <h3 class="dim">Your next project</h3>
+              <p class="dim">This slot is intentionally empty.</p>
+              <a class="mono clip-cta" href="#scene-contact" data-cursor="GO">START A BRIEF →</a>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SCENE 05 : THE PIPELINE ===== -->
+    <section class="scene pipeline" id="scene-pipeline" data-scene="SCENE 05 · THE PIPELINE">
+      <h2 class="scene-title"><span class="mono scene-num">05</span> THE PIPELINE</h2>
+      <p class="pipeline-intro">One person. Full stack of production. Every spot runs the same
+         chain: a workflow that delivers broadcast-quality output at a fraction of
+         traditional cost.</p>
+      <div class="pipe">
+        <svg class="pipe-line" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path id="pipe-path" d="M2 0 L2 1000" stroke="currentColor" stroke-width="4" fill="none"/>
+        </svg>
+        <ol class="pipe-steps">
+          <li class="pipe-step"><span class="mono step-num">ST_01</span>
+            <h3>Concept</h3><p>Scripts, boards & creative direction developed with Claude.</p></li>
+          <li class="pipe-step"><span class="mono step-num">ST_02</span>
+            <h3>Generate</h3><p>Cinematic footage generated & art-directed in Higgsfield.</p></li>
+          <li class="pipe-step"><span class="mono step-num">ST_03</span>
+            <h3>Edit</h3><p>Cut, graded & composited in DaVinci Resolve 21 / Final Cut Pro X.</p></li>
+          <li class="pipe-step"><span class="mono step-num">ST_04</span>
+            <h3>Sound</h3><p>Atmospheric audio & sound design layered for texture and tension.</p></li>
+          <li class="pipe-step"><span class="mono step-num">ST_05</span>
+            <h3>Ship</h3><p>Optimized for reels, paid placements & product launches. Then we measure.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== SCENE 06 : NUMBERS ===== -->
+    <section class="scene numbers" id="scene-numbers" data-scene="SCENE 06 · RECEIPTS">
+      <h2 class="scene-title"><span class="mono scene-num">06</span> THE RECEIPTS</h2>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-val" data-count="535" data-suffix="K+">0</span>
+          <span class="mono stat-label">CAMPAIGN VIDEO VIEWS</span></div>
+        <div class="stat"><span class="stat-val" data-count="77" data-prefix="+" data-suffix="%">0</span>
+          <span class="mono stat-label">YoY Q4 REVENUE GROWTH</span></div>
+        <div class="stat"><span class="stat-val" data-count="2" data-prefix="$" data-suffix="M+">0</span>
+          <span class="mono stat-label">ATTRIBUTABLE REVENUE</span></div>
+        <div class="stat"><span class="stat-val" data-count="96.5" data-suffix="%">0</span>
+          <span class="mono stat-label">NON-FOLLOWER REACH, TOP REEL</span></div>
+      </div>
+    </section>
+
+    <!-- ===== SCENE 07 : CONTACT ===== -->
+    <section class="scene contact" id="scene-contact" data-scene="SCENE 07 · CREDITS">
+      <p class="mono contact-kicker">SCENE 07 · ROLL CREDITS</p>
+      <h2 class="contact-title">LET'S BUILD<br><span class="outline">QUALITY TOGETHER.</span></h2>
+      <a class="contact-email" href="mailto:Joshuarbojorquez@gmail.com" data-cursor="SEND">
+        Joshuarbojorquez@gmail.com</a>
+      <div class="contact-links mono">
+        <a href="https://www.linkedin.com/" data-cursor="GO">LINKEDIN ↗</a>
+        <a href="https://github.com/JoshBigBattery" data-cursor="GO">GITHUB ↗</a>
+      </div>
+      <footer class="mono footer">
+        <span>© 2026 JOSHUA BOJORQUEZ</span>
+        <span>SHOT ON SCROLL · NO FILM WAS HARMED</span>
+        <span>FIN.</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
