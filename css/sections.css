@@ -860,9 +860,10 @@
      Everything therefore flows in one column and the hero is allowed to run
      past one screen.
 
-     Order is: greeting/name → tagline → CLIP → scroll cue → toolkit/bio/play.
-     The clip sits between the tagline and the cue, not at the very bottom, so
-     it plays before the reader is prompted to scroll on.
+     Order is: greeting/name → tagline → CLIP → toolkit/bio/play. The scroll
+     cue is desktop-only: on mobile the reader is already scrolling by touch,
+     there's no pinned hold to explain, and the toolkit sits one swipe below
+     the clip regardless, so the prompt has nothing to add here.
 
      .hero-grid and .hero-upper carry no styling of their own at this width
      (the pin timeline that targets .hero-upper only runs above 720px); they
@@ -876,8 +877,8 @@
   .hero-name { order: 2; }
   .hero-tagline { order: 3; }
   .hero-media { order: 4; }
-  .hero-cue { order: 5; }
-  .hero-lower { order: 6; }
+  .hero-cue { display: none; }
+  .hero-lower { order: 5; }
 
   .hero {
     min-height: 0;
