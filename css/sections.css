@@ -800,18 +800,31 @@
    without a layout jump once metadata arrives. */
 .about-video {
   align-self: start;
-  max-width: 260px;      /* was 380px and read as too large next to the bio text */
+  /* The subject is dead centre in his own frame (measured: 8px off centre out
+     of 890). He read as leaning left because the BOX was left-aligned in a
+     492px column while only being 260px wide, stranding 232px of empty space
+     to its right. Centring the box in the column is the actual fix. */
+  justify-self: center;
+  max-width: 286px;
   aspect-ratio: 890 / 1200;
   overflow: hidden;
   background: var(--ink);
-  --feather: 20%;
+  /* Asymmetric on purpose. The top fade has to finish before his hair starts,
+     and he bobs while waving: sampled across the clip, the crown reaches as
+     high as 4.17% from the top, so 3.5% clears it in every frame. It can be
+     this thin because the clip's own backdrop is within ~4 units of --ink, so
+     the seam has almost nothing to hide in the first place. The other three
+     edges keep a wide, soft fade. */
+  --feather-x: 20%;
+  --feather-top: 3.5%;
+  --feather-bottom: 18%;
   -webkit-mask-image:
-    linear-gradient(to right, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%);
+    linear-gradient(to right, transparent 0, #000 var(--feather-x), #000 calc(100% - var(--feather-x)), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 var(--feather-top), #000 calc(100% - var(--feather-bottom)), transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(to right, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%);
+    linear-gradient(to right, transparent 0, #000 var(--feather-x), #000 calc(100% - var(--feather-x)), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 var(--feather-top), #000 calc(100% - var(--feather-bottom)), transparent 100%);
   mask-composite: intersect;
 }
 .about-video video {
