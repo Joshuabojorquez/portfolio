@@ -788,10 +788,18 @@
 .btn-ghost:hover { background: var(--acid); color: #fff; }
 
 /* the BTS clip, same framed-tile treatment as .reel-card so it reads as
-   "media" against the flat hairline rules the rest of this section uses */
+   "media" against the flat hairline rules the rest of this section uses.
+   The source is a portrait crop (890x1200, not 16:9): hardcoding that exact
+   ratio here, matching the encode, is what lets the box hold its shape
+   before the clip has loaded (it's preload="none" until scrolled into view)
+   without a layout jump once metadata arrives. A landscape box around a
+   portrait clip was also the original bug this replaces: object-fit:cover
+   never adds bars, so the black margins in the old version had to be
+   letterboxing baked into that source's own pixels, not a CSS artifact. */
 .about-video {
   align-self: start;
-  aspect-ratio: 16 / 9;
+  max-width: 380px;      /* full column width made a 4:5-ish clip taller than the bio text beside it */
+  aspect-ratio: 890 / 1200;
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
