@@ -787,23 +787,32 @@
 .btn-ghost { background: transparent; color: var(--acid); }
 .btn-ghost:hover { background: var(--acid); color: #fff; }
 
-/* the BTS clip, same framed-tile treatment as .reel-card so it reads as
-   "media" against the flat hairline rules the rest of this section uses.
+/* the BTS clip, feathered into the page rather than framed as a tile: no
+   border or radius, all four edges fade out through a CSS mask (the same
+   technique the hero backdrop uses, just on every side instead of just the
+   two that don't already sit on the viewport edge). background:var(--ink)
+   rather than --ink-2 so whatever the fade reveals behind it is the actual
+   page tone, not a slightly-off card colour.
+
    The source is a portrait crop (890x1200, not 16:9): hardcoding that exact
    ratio here, matching the encode, is what lets the box hold its shape
    before the clip has loaded (it's preload="none" until scrolled into view)
-   without a layout jump once metadata arrives. A landscape box around a
-   portrait clip was also the original bug this replaces: object-fit:cover
-   never adds bars, so the black margins in the old version had to be
-   letterboxing baked into that source's own pixels, not a CSS artifact. */
+   without a layout jump once metadata arrives. */
 .about-video {
   align-self: start;
-  max-width: 380px;      /* full column width made a 4:5-ish clip taller than the bio text beside it */
+  max-width: 260px;      /* was 380px and read as too large next to the bio text */
   aspect-ratio: 890 / 1200;
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: var(--ink-2);
+  background: var(--ink);
+  --feather: 20%;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%);
+  mask-composite: intersect;
 }
 .about-video video {
   width: 100%;
