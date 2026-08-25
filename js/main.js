@@ -1067,7 +1067,7 @@ if (window.gsap && !reduceMotion) {
   });
 
   /* about + contact reveals */
-  gsap.from(".about-copy p, .about-facts span", {
+  gsap.from(".about-copy p, .about-video", {
     opacity: 0, y: 30, duration: 0.8, stagger: 0.08, ease: "power3.out",
     scrollTrigger: { trigger: ".about-grid", start: "top 80%" },
   });
