@@ -589,8 +589,25 @@
   .reel-nav.prev { left: 4px; }
   .reel-nav.next { right: 4px; }
 
-  .reel-stats { grid-template-columns: repeat(2, 1fr); gap: 18px 0; }
-  .reel-stat:nth-child(3) { border-left: 0; }
+  /* "MY RECENT WORKS" on one line. It already fits the 335px measure at the
+     mobile title size (323px), it was only breaking because wrapping was
+     allowed. Scoped to this one title rather than .scene-title generally,
+     since "BEHIND THE SCENES" is longer and would overflow with nowrap on.
+     The floor drops to 1.5rem so it still fits a 320px-wide phone, where the
+     shared 1.9rem minimum would spill once wrapping is off. */
+  #scene-reel .scene-title {
+    white-space: nowrap;
+    font-size: clamp(1.5rem, 8.4vw, 2.6rem);
+  }
+
+  /* One row, not a 2x2 block: four stacked cells cost real height on a phone,
+     and this section already has to fit the stage, caption, stats and dots.
+     Only the first two fields survive (VIEWS and LINK CLICKS, ordered for this
+     in STAT_FIELDS): reach, then the metric these campaigns were judged on. */
+  .reel-stats { grid-template-columns: repeat(2, 1fr); }
+  .reel-stat:nth-child(n + 3) { display: none; }
+  .reel-stat-val { font-size: 1.45rem; }
+  .reel-stat-label { font-size: 0.55rem; letter-spacing: 0.1em; }
   .reel-mute { width: 32px; height: 32px; top: 10px; right: 10px; }
   .reel-mute svg { width: 15px; height: 15px; }
 

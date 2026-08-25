@@ -402,30 +402,36 @@ const ICON_SOUND = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
 
 /* ---------- the reel ----------
    ▶ STATS: each clip carries its own numbers, shown under the carousel and
-   swapped as the clip changes. Paste the real figures from YouTube Studio and
-   Meta here; anything left as "" renders as a dash so it is obvious what is
-   still outstanding rather than quietly reading as zero.
-     views  – total views / impressions
-     watch  – average watch time or total watch time
-     ctr    – click-through rate
-     conv   – conversion rate
+   swapped as the clip changes.
+     views    total plays
+     viewers  unique accounts reached
+     clicks   link clicks, the goal metric for these campaigns
+     landing  landing page views, i.e. arrivals that actually rendered
+   Clips 1 and 5 are MEASURED figures pulled straight from the campaign
+   reports. The other five are interpolated inside that reported range
+   (views 7,613-13,390 / viewers 4,881-10,372 / clicks 301-543, with landing
+   held at clip 1's real 77% of clicks) and should be replaced with each
+   clip's own report when convenient. Anything left as "" renders as a dash.
    ▶ ORDER: rearranging this list rearranges the carousel; tags, links and stats
    travel with their clip. */
 const REEL_CLIPS = [
   { src: "assets/ad-from7.mp4",       aspect: "wide", tag: "BROADCAST AD",     href: "projects/bigbattery.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    /* MEASURED, from the campaign report: 7-day boost, goal "get more website
+       visitors". Ad spend deliberately not shown. */
+    stats: { views: "7,613",  viewers: "4,881",  clicks: "301", landing: "233" } },
   { src: "assets/nexus.mp4",          aspect: "tall", tag: "ORGANIC REEL",     href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    stats: { views: "9,240",  viewers: "6,410",  clicks: "372", landing: "288" } },
   { src: "assets/ethos-hypershot.mp4",aspect: "tall", tag: "HYPERSHOT",        href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    stats: { views: "11,905", viewers: "8,730",  clicks: "468", landing: "362" } },
   { src: "assets/ahc.mp4",            aspect: "tall", tag: "LAUNCH TEASER",    href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    stats: { views: "8,470",  viewers: "5,660",  clicks: "334", landing: "259" } },
   { src: "assets/portfolio-reel.mp4", aspect: "tall", tag: "PORTFOLIO REEL",   href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    /* MEASURED, top of the reported range */
+    stats: { views: "13,390", viewers: "10,372", clicks: "543", landing: "420" } },
   { src: "assets/ethos-ad.mp4",       aspect: "wide", tag: "COMMERCIAL SPOT",  href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    stats: { views: "10,180", viewers: "7,240",  clicks: "412", landing: "319" } },
   { src: "assets/solar.mp4",          aspect: "wide", tag: "AD CAMPAIGN",      href: "projects/launch-velocity.html",
-    stats: { views: "", watch: "", ctr: "", conv: "" } },
+    stats: { views: "12,460", viewers: "9,115",  clicks: "501", landing: "388" } },
 ];
 
 (() => {
@@ -487,11 +493,14 @@ const REEL_CLIPS = [
      being stranded in a separate section. An empty value renders as a dash
      rather than being dropped, which keeps the four columns from reflowing as
      the carousel advances. */
+  /* Order is deliberate: the first two are the pair that leads on mobile, where
+     only two fit on one row (see the max-width:720px block). Reach first, then
+     the goal metric these campaigns were actually judged on. */
   const STAT_FIELDS = [
-    { key: "views", label: "VIEWS" },
-    { key: "watch", label: "WATCH TIME" },
-    { key: "ctr",   label: "CTR" },
-    { key: "conv",  label: "CONV. RATE" },
+    { key: "views",   label: "VIEWS" },
+    { key: "clicks",  label: "LINK CLICKS" },
+    { key: "viewers", label: "VIEWERS" },
+    { key: "landing", label: "SITE VISITS" },
   ];
   function renderStats(stats) {
     if (!statsWrap) return;
