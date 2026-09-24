@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joshua Bojorquez | Motion Design & AI-Assisted Video</title>
-  <meta name="description" content="Joshua Bojorquez: motion design, video marketing, and AI-assisted commercial production. UX designer & web project manager. Portfolio.">
+  <title>Joshua Bojorquez | UX/UI & Product Designer</title>
+  <meta name="description" content="Joshua Bojorquez: UX/UI and product designer. User research through to shipped design systems, product design for BigBattery's battery and inverter lines, and the launch marketing behind them. Portfolio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
@@ -36,10 +36,10 @@
     </button>
     <div class="scene-nav-tabs" id="scene-nav-tabs">
       <a href="#scene-hero" class="scene-nav-tab mono" data-target="scene-hero" data-cursor="GO" data-hud-frame>INTRO</a>
-      <a href="#scene-reel" class="scene-nav-tab mono" data-target="scene-reel" data-cursor="GO" data-hud-frame>WORK</a>
-      <a href="#scene-about" class="scene-nav-tab mono" data-target="scene-about" data-cursor="GO" data-hud-frame>ABOUT</a>
       <a href="#scene-work" class="scene-nav-tab mono" data-target="scene-work" data-cursor="GO" data-hud-frame>CASE STUDIES</a>
-      <a href="#scene-pipeline" class="scene-nav-tab mono" data-target="scene-pipeline" data-cursor="GO" data-hud-frame>PROCESS</a>
+      <a href="#scene-product" class="scene-nav-tab mono" data-target="scene-product" data-cursor="GO" data-hud-frame>PRODUCT</a>
+      <a href="#scene-reel" class="scene-nav-tab mono" data-target="scene-reel" data-cursor="GO" data-hud-frame>VIDEO</a>
+      <a href="#scene-about" class="scene-nav-tab mono" data-target="scene-about" data-cursor="GO" data-hud-frame>ABOUT</a>
       <a href="#scene-numbers" class="scene-nav-tab mono" data-target="scene-numbers" data-cursor="GO" data-hud-frame>RESULTS</a>
       <a href="#scene-contact" class="scene-nav-tab mono" data-target="scene-contact" data-cursor="GO" data-hud-frame>CONTACT</a>
     </div>
@@ -73,9 +73,9 @@
             <span class="line line-1"><span class="word">JOSHUA</span></span>
             <span class="line line-2"><span class="word outline">BOJORQUEZ</span></span>
           </h1>
-          <p class="hero-tagline">I'm an end-to-end product designer for AI and ecommerce
-            sites, taking work from user research through to high-fidelity shipped
-            design and systems.</p>
+          <p class="hero-tagline">I'm a UX/UI and product designer: user research through
+            to shipped design systems, backed by the product marketing and AI video
+            that launch them.</p>
           <!-- last thing to arrive: prompts the first scroll, and advances a stop
                when clicked (see main.js) -->
           <button class="hero-cue mono" id="hero-cue">
@@ -99,24 +99,119 @@
           it's a marketing film, a short ad concept, or a design proposal that has to
           win the room. I chase the frame that stops the scroll and the idea that
           gets the yes.</p>
-        <button class="hero-play" id="hero-play" aria-label="Roll the tape: jump to My Recent Works" data-cursor="PLAY">
+        <button class="hero-play" id="hero-play" aria-label="See the work: jump to the case studies" data-cursor="PLAY">
           <span class="hero-play-btn" aria-hidden="true"></span>
-          <span class="mono hero-play-label">ROLL THE TAPE</span>
+          <span class="mono hero-play-label">SEE THE WORK</span>
         </button>
       </div>
     </section>
 
-    <!-- ===== SCENE 02 : MY RECENT WORKS (3D coverflow carousel) ===== -->
+    <!-- ===== SCENE 02 : CASE STUDIES (UX/UI, horizontal drag/scroll carousel) ===== -->
+    <section class="scene work" id="scene-work" data-scene="SCENE 02 · CASE STUDIES">
+      <div class="footage-head">
+        <h2 class="scene-title"><span class="mono scene-num">02</span> CASE STUDIES</h2>
+        <span class="mono footage-hint">◄ DRAG / SCROLL ►</span>
+      </div>
+      <p class="work-sub">UX/UI documentation & measured results from the last few years.
+         Open a case file for the full process.</p>
+      <div class="work-track" id="work-track">
+
+          <a class="clip" href="projects/bigbattery.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-a"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 01</span>
+              <h3>BigBattery: Curing Analysis Paralysis</h3>
+              <p>Consolidating a sprawling battery catalogue into 30 outcome-led pages so
+                 non-expert buyers could qualify themselves.</p>
+              <span class="mono clip-stat">+75% ORGANIC TRAFFIC · +28% PAGE CONVERSION</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <a class="clip" href="projects/launch-velocity.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-b"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 02</span>
+              <h3>Launch Velocity</h3>
+              <p>The launch funnel for BigBattery's solar and golf-cart lines: landing
+                 pages, ads and video shipped as one experience.</p>
+              <span class="mono clip-stat">$457K PIPELINE GROWTH · 535K+ VIEWS</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <a class="clip" href="projects/convert-the-current.html" data-cursor="OPEN" data-hud-frame>
+            <div class="clip-thumb thumb-c"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 03</span>
+              <h3>Convert the Current</h3>
+              <p>Conversion-focused UX across homepage & key landing pages:
+                 research, prototyping, sprint delivery.</p>
+              <span class="mono clip-stat">+77% YoY Q4 REVENUE · $2M+ ATTRIBUTABLE</span>
+              <span class="mono clip-cta">OPEN CASE FILE →</span>
+            </div>
+          </a>
+
+          <div class="clip clip-empty">
+            <div class="clip-body">
+              <span class="mono clip-num">CLIP 04</span>
+              <h3 class="dim">Your next project</h3>
+              <p class="dim">This slot is intentionally empty.</p>
+              <a class="mono clip-cta" href="#scene-contact" data-cursor="GO">START A BRIEF →</a>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SCENE 03 : PRODUCT DESIGN (hardware designed at BigBattery) ===== -->
+    <!--
+      ▶ PHOTOS: each card has a .product-media slot holding a placeholder. Drop
+      the image into /assets, add its filename to the .gitignore allow-list, and
+      swap the placeholder <span> for
+        <img src="assets/FILE.jpg" alt="PRODUCT NAME" loading="lazy">
+    -->
+    <section class="scene product" id="scene-product" data-scene="SCENE 03 · PRODUCT DESIGN">
+      <h2 class="scene-title"><span class="mono scene-num">03</span> PRODUCT DESIGN</h2>
+      <p class="product-intro">Physical products I designed at BigBattery, alongside the
+        digital experiences that sell them.</p>
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <h3 class="product-name">NEXUS</h3>
+          <p class="product-detail">14.3 kWh battery</p>
+        </article>
+        <article class="product-card">
+          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <h3 class="product-name">NEXUS 2</h3>
+          <p class="product-detail">16 kWh battery</p>
+        </article>
+        <article class="product-card">
+          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <h3 class="product-name">APEX-6.5K</h3>
+          <p class="product-detail">Inverter</p>
+        </article>
+        <article class="product-card">
+          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <h3 class="product-name">APEX-10K</h3>
+          <p class="product-detail">Inverter</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== SCENE 04 : MY RECENT WORKS (3D coverflow carousel) ===== -->
     <!--
       ▶ EDIT THE REEL: cards are built by JS from the REEL_CLIPS list in
       js/main.js, add/remove/reorder clips there. Each entry is
       { src, aspect: "tall"|"wide", tag, href, stats }. Drop new .mp4s in /assets.
       Per-clip numbers live in that same list.
     -->
-    <section class="scene footage-scene" id="scene-reel" data-scene="SCENE 02 · MY RECENT WORKS">
+    <section class="scene footage-scene" id="scene-reel" data-scene="SCENE 04 · MY RECENT WORKS">
       <div class="footage-head">
-        <h2 class="scene-title"><span class="mono scene-num">02</span> MY RECENT WORKS</h2>
+        <h2 class="scene-title"><span class="mono scene-num">04</span> MY RECENT WORKS</h2>
       </div>
+      <p class="work-sub">Launch video for the products and pages above, measured by the
+         traffic each clip sent to them.</p>
       <div class="reel" id="reel">
         <button class="reel-nav prev" id="reel-prev" aria-label="Previous clip" data-cursor="PREV">‹</button>
         <div class="reel-viewport">
@@ -131,16 +226,16 @@
       <div class="reel-dots" id="reel-dots"></div>
     </section>
 
-    <!-- ===== SCENE 03 : ABOUT ===== -->
-    <section class="scene about" id="scene-about" data-scene="SCENE 03 · BTS">
-      <h2 class="scene-title"><span class="mono scene-num">03</span> BEHIND THE SCENES</h2>
+    <!-- ===== SCENE 05 : ABOUT ===== -->
+    <section class="scene about" id="scene-about" data-scene="SCENE 05 · BTS">
+      <h2 class="scene-title"><span class="mono scene-num">05</span> BEHIND THE SCENES</h2>
       <div class="about-grid">
         <div class="about-copy">
-          <p>I'm Joshua, a Google-certified UX designer turned web project manager
-             turned AI-assisted commercial producer. By day I lead cross-functional
-             teams shipping high-performing e-commerce experiences; by night I direct
-             cinematic product spots with an AI production pipeline I built myself.</p>
-          <p>The throughline: <strong>motion that sells.</strong> Whether it's a
+          <p>I'm Joshua, a Google-certified UX designer who grew into product design and
+             web project management. I lead cross-functional teams shipping
+             high-performing e-commerce experiences, and I produce the launch video that
+             puts them in front of buyers with an AI workflow I built myself.</p>
+          <p>The throughline: <strong>design that sells.</strong> Whether it's a
              landing page, a launch campaign, or a 15-second spot, I design for the
              moment attention is won or lost.</p>
           <p class="mono about-loc">📍 CADDO MILLS, TX · OPEN TO RELOCATION</p>
@@ -173,101 +268,20 @@
       </div>
     </section>
 
-    <!-- ===== SCENE 04 : CASE STUDIES (horizontal carousel, drag/scroll, matches MY RECENT WORKS) ===== -->
-    <section class="scene work" id="scene-work" data-scene="SCENE 04 · CASE STUDIES">
-      <div class="footage-head">
-        <h2 class="scene-title"><span class="mono scene-num">04</span> CASE STUDIES</h2>
-        <span class="mono footage-hint">◄ DRAG / SCROLL ►</span>
-      </div>
-      <p class="work-sub">UX/UI documentation & measured results from the last few years.
-         Open a case file for the full process.</p>
-      <div class="work-track" id="work-track">
-
-          <a class="clip" href="projects/bigbattery.html" data-cursor="OPEN" data-hud-frame>
-            <div class="clip-thumb thumb-a"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
-            <div class="clip-body">
-              <span class="mono clip-num">CLIP 01</span>
-              <h3>BigBattery: Curing Analysis Paralysis</h3>
-              <p>Consolidating a sprawling battery catalogue into 30 outcome-led pages so
-                 non-expert buyers could qualify themselves.</p>
-              <span class="mono clip-stat">+75% ORGANIC TRAFFIC · +28% PAGE CONVERSION</span>
-              <span class="mono clip-cta">OPEN CASE FILE →</span>
-            </div>
-          </a>
-
-          <a class="clip" href="projects/launch-velocity.html" data-cursor="OPEN" data-hud-frame>
-            <div class="clip-thumb thumb-b"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
-            <div class="clip-body">
-              <span class="mono clip-num">CLIP 02</span>
-              <h3>Launch Velocity</h3>
-              <p>Product-launch video content & ad campaigns for BigBattery's
-                 solar and golf-cart lines.</p>
-              <span class="mono clip-stat">535K+ VIEWS · $457K PIPELINE GROWTH</span>
-              <span class="mono clip-cta">OPEN CASE FILE →</span>
-            </div>
-          </a>
-
-          <a class="clip" href="projects/convert-the-current.html" data-cursor="OPEN" data-hud-frame>
-            <div class="clip-thumb thumb-c"><span class="mono thumb-tag">PASTE STILL / EMBED</span></div>
-            <div class="clip-body">
-              <span class="mono clip-num">CLIP 03</span>
-              <h3>Convert the Current</h3>
-              <p>Conversion-focused UX across homepage & key landing pages:
-                 research, prototyping, sprint delivery.</p>
-              <span class="mono clip-stat">+77% YoY Q4 REVENUE · $2M+ ATTRIBUTABLE</span>
-              <span class="mono clip-cta">OPEN CASE FILE →</span>
-            </div>
-          </a>
-
-          <div class="clip clip-empty">
-            <div class="clip-body">
-              <span class="mono clip-num">CLIP 04</span>
-              <h3 class="dim">Your next project</h3>
-              <p class="dim">This slot is intentionally empty.</p>
-              <a class="mono clip-cta" href="#scene-contact" data-cursor="GO">START A BRIEF →</a>
-            </div>
-          </div>
-
-      </div>
-    </section>
-
-    <!-- ===== SCENE 05 : THE PIPELINE ===== -->
-    <section class="scene pipeline" id="scene-pipeline" data-scene="SCENE 05 · THE PIPELINE">
-      <h2 class="scene-title"><span class="mono scene-num">05</span> THE PIPELINE</h2>
-      <p class="pipeline-intro">One person. Full stack of production. Every spot runs the same
-         chain: a workflow that delivers broadcast-quality output at a fraction of
-         traditional cost.</p>
-      <div class="pipe">
-        <svg class="pipe-line" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true">
-          <path id="pipe-path" d="M2 0 L2 1000" stroke="currentColor" stroke-width="4" fill="none"/>
-        </svg>
-        <ol class="pipe-steps">
-          <li class="pipe-step"><span class="mono step-num">ST_01</span>
-            <h3>Concept</h3><p>Scripts, boards & creative direction developed with Claude.</p></li>
-          <li class="pipe-step"><span class="mono step-num">ST_02</span>
-            <h3>Generate</h3><p>Cinematic footage generated & art-directed in Higgsfield.</p></li>
-          <li class="pipe-step"><span class="mono step-num">ST_03</span>
-            <h3>Edit</h3><p>Cut, graded & composited in DaVinci Resolve 21 / Final Cut Pro X.</p></li>
-          <li class="pipe-step"><span class="mono step-num">ST_04</span>
-            <h3>Sound</h3><p>Atmospheric audio & sound design layered for texture and tension.</p></li>
-          <li class="pipe-step"><span class="mono step-num">ST_05</span>
-            <h3>Ship</h3><p>Optimized for reels, paid placements & product launches. Then we measure.</p></li>
-        </ol>
-      </div>
-    </section>
-
     <!-- ===== SCENE 06 : NUMBERS ===== -->
     <section class="scene numbers" id="scene-numbers" data-scene="SCENE 06 · RECEIPTS">
       <h2 class="scene-title"><span class="mono scene-num">06</span> THE RECEIPTS</h2>
+      <!-- business and UX outcomes only. Per-clip video numbers moved to the
+           reel's own stat row, so each metric sits beside the work it measures. -->
       <div class="stat-grid">
-        <div class="stat"><span class="stat-val" data-count="535" data-suffix="K+">0</span>
-          <span class="mono stat-label">CAMPAIGN VIDEO VIEWS</span></div>
         <div class="stat"><span class="stat-val" data-count="77" data-prefix="+" data-suffix="%">0</span>
           <span class="mono stat-label">YoY Q4 REVENUE GROWTH</span></div>
         <div class="stat"><span class="stat-val" data-count="2" data-prefix="$" data-suffix="M+">0</span>
           <span class="mono stat-label">ATTRIBUTABLE REVENUE</span></div>
-        <div class="stat"><span class="stat-val" data-count="96.5" data-suffix="%">0</span>
-          <span class="mono stat-label">NON-FOLLOWER REACH, TOP REEL</span></div>
+        <div class="stat"><span class="stat-val" data-count="28" data-prefix="+" data-suffix="%">0</span>
+          <span class="mono stat-label">PRODUCT PAGE CONVERSION</span></div>
+        <div class="stat"><span class="stat-val" data-count="75" data-prefix="+" data-suffix="%">0</span>
+          <span class="mono stat-label">ORGANIC TRAFFIC</span></div>
       </div>
     </section>
 

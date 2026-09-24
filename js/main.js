@@ -913,7 +913,7 @@ if (window.gsap && !reduceMotion) {
          by ourselves would skip a stop they never asked to leave. */
       if (window.__snapActive) return;
       advanced = true;
-      const next = document.getElementById("scene-reel");
+      const next = document.getElementById("scene-work");
       if (next) next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
     };
     const cancelPending = () => {
@@ -1030,35 +1030,11 @@ if (window.gsap && !reduceMotion) {
     scrollTrigger: { trigger: ".work-track", start: "top 80%" },
   });
 
-  /* pipeline line draw + step reveals. The rail's progress also fills each
-     diamond as it passes through it: the svg is preserveAspectRatio="none" over
-     the pipe's full height, so progress maps straight to a pixel depth and each
-     diamond lights once the drawn line has reached its centre. */
-  const pipeEl = document.querySelector(".pipe");
-  const pipeSteps = [...document.querySelectorAll(".pipe-step")];
-  const litUpTo = (progress) => {
-    if (!pipeEl) return;
-    const pipeTop = pipeEl.getBoundingClientRect().top;
-    const drawn = progress * pipeEl.getBoundingClientRect().height;
-    pipeSteps.forEach((step) => {
-      /* ::before is 8px down from the step's top and 24px tall (20 + borders) */
-      const centre = step.getBoundingClientRect().top - pipeTop + 8 + 12;
-      step.classList.toggle("is-lit", drawn >= centre);
-    });
-  };
-  gsap.to("#pipe-path", {
-    strokeDashoffset: 0, ease: "none",
-    scrollTrigger: {
-      trigger: ".pipe", start: "top 70%", end: "bottom 60%", scrub: true,
-      onUpdate: (self) => litUpTo(self.progress),
-      onRefresh: (self) => litUpTo(self.progress),
-    },
-  });
-  document.querySelectorAll(".pipe-step").forEach((step) => {
-    gsap.from(step, {
-      opacity: 0, x: -40, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: step, start: "top 80%" },
-    });
+  /* product cards: staggered fade-in as the grid arrives, same treatment as
+     the case-study clips above it */
+  gsap.from(".product-card", {
+    autoAlpha: 0, y: 24, duration: 0.8, stagger: 0.1, ease: "power3.out",
+    scrollTrigger: { trigger: ".product-grid", start: "top 82%" },
   });
 
   /* stat counters */
@@ -1091,16 +1067,17 @@ if (window.gsap && !reduceMotion) {
 } else {
   /* reduced motion or no GSAP: the hero copy is hidden by default for the
      staged reveal, so show it outright rather than leaving it invisible */
-  document.querySelectorAll(".hero-tagline, .hero-cue").forEach((el) => {
-    el.style.opacity = "1";
-    el.style.visibility = "visible";
-    el.style.transform = "none";
-  });
-  /* the rail is drawn by a scrubbed tween, so without one it would stay
-     invisible: show it complete, with every diamond filled */
-  const pipePath = document.getElementById("pipe-path");
-  if (pipePath) pipePath.style.strokeDashoffset = "0";
-  document.querySelectorAll(".pipe-step").forEach((s) => s.classList.add("is-lit"));
+  /* .hero-lower is in this list deliberately. It is opacity:0/visibility:hidden
+     in CSS and was only ever revealed inside the GSAP branch, so under
+     reduced motion the whole skillset block (toolkit, bio, play button) was
+     invisible at every scroll position while the cue still said "scroll for
+     skillset". */
+  document.querySelectorAll(".hero-tagline, .hero-cue, .hero-lower")
+    .forEach((el) => {
+      el.style.opacity = "1";
+      el.style.visibility = "visible";
+      el.style.transform = "none";
+    });
   /* static counters */
   document.querySelectorAll(".stat-val").forEach((el) => {
     el.textContent = (el.dataset.prefix || "") + el.dataset.count + (el.dataset.suffix || "");
@@ -1111,8 +1088,8 @@ if (window.gsap && !reduceMotion) {
    One scroll gesture moves one stop, instead of free-scrolling the whole page.
    The reader steps through the site rather than dragging a wheel through it.
 
-   Only the opening run of the page is stepped: the hero, the reel and Behind
-   the Scenes. CASE STUDIES is the last stop, and from there down (the pipeline,
+   Only the showcase is stepped: the hero, CASE STUDIES, PRODUCT DESIGN and the
+   video reel. The reel is the last stop, and from there down (Behind the Scenes,
    the receipts, the credits) scrolling is free, because that stretch is reading
    material rather than a set of beats.
 
@@ -1137,7 +1114,7 @@ if (window.gsap && !reduceMotion) {
   const SPLIT_FRACTION = 0.45;   // excess content this deep gets its own stop
   /* the last stepped section. Its stop is the final one; everything below it
      scrolls freely. */
-  const LAST_STEPPED = "scene-work";
+  const LAST_STEPPED = "scene-reel";
   const EDGE = 6;            // px of slack around the boundary
 
   let stops = [];
@@ -1266,7 +1243,7 @@ if (window.gsap && !reduceMotion) {
 
   /* Below the final stop the page is the reader's to scroll. Also true when
      sitting exactly on that stop and heading down, so a gesture there releases
-     into the pipeline rather than snapping nowhere. */
+     into Behind the Scenes rather than snapping nowhere. */
   const isFree = (dir) => {
     const y = window.scrollY;
     const last = lastStopY();
@@ -1333,10 +1310,12 @@ if (window.gsap && !reduceMotion) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueRebuild);
 })();
 
-/* hero play button: arm (▶ rotates to ▼), then head for MY RECENT WORKS */
+/* hero play button: arm (▶ rotates to ▼), then head for the CASE STUDIES.
+   It used to skip to the video reel, which would now jump the reader straight
+   past the UX work and the product design to reach it. */
 (() => {
   const btn = document.getElementById("hero-play");
-  const target = document.getElementById("scene-reel");
+  const target = document.getElementById("scene-work");
   if (!btn || !target) return;
   btn.addEventListener("click", () => {
     if (btn.classList.contains("is-armed")) return;

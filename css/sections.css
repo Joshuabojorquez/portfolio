@@ -10,10 +10,14 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  /* The kicker + name are centred in what's left after this padding. It has to
-     be deep enough to keep them clear of .hero-lower, which is absolutely
-     positioned along the bottom edge. */
-  padding-bottom: clamp(240px, 32vh, 360px);
+  /* The kicker + name are centred in what's left after this padding.
+     Down from 32vh, which dated from when .hero-lower sat along the bottom edge
+     and the name had to clear it. .hero-lower now spans the full safe band and
+     centres itself, and the two blocks crossfade rather than share the screen,
+     so this only places the landing block. At 32vh the hero measured 940px in a
+     900px viewport once "Hi, I'm" grew and the scroll cue arrived, and the pin
+     assumes the hero fits 100svh. */
+  padding-bottom: clamp(160px, 20vh, 300px);
   /* Keeps the hero inside 100svh (its own scroll-linked pin depends on that)
      and clears the fixed nav row (~57px tall) above the kicker. */
   padding-top: clamp(66px, 8vh, 96px);
@@ -222,8 +226,10 @@
    Starts hidden: JS brings it in once the name has landed, so the reveal reads
    as a sequence rather than everything arriving at once. */
 .hero-tagline {
-  margin-top: 1.5rem;
-  max-width: 46ch;
+  margin-top: 1.35rem;
+  /* 46ch left most of the 58%-wide text column unused and cost an extra line
+     the hero cannot afford; 54ch wraps to three lines at desktop widths */
+  max-width: 54ch;
   font-size: clamp(1rem, 1.45vw, 1.2rem);
   line-height: 1.55;
   color: rgba(var(--bone-rgb), 0.82);
@@ -695,53 +701,50 @@
   .clip { width: min(80vw, 340px); }
 }
 
-/* ===== SCENE 04 : PIPELINE ===== */
-.pipeline-intro { max-width: 52ch; color: rgba(var(--bone-rgb), 0.75); margin-bottom: 4rem; }
-
-.pipe { position: relative; padding-left: clamp(28px, 5vw, 60px); }
-
-/* The rail has to sit on the diamonds' axis. Those are 24px boxes (20 + 2px
-   borders each side) offset by the pipe's own left padding and then nudged
-   -8px, which puts their centre 4px in from the pipe's left edge. A 4px stroke
-   therefore starts at 2px. It used to start at 8px, which left the line 6px
-   right of every diamond. */
-.pipe-line {
-  position: absolute;
-  left: 2px; top: 0; bottom: 0;
-  width: 4px; height: 100%;
-  color: var(--acid);
+/* ===== SCENE 03 : PRODUCT DESIGN =====
+   Four cards on one row, in the same type-and-hairline language as the rest of
+   the page. No frame on the media slot: the BTS clip already established that a
+   bordered box reads as pasted on, so the placeholder is just a soft tonal block
+   marking where each photo lands. Photos use object-fit:contain because cropping
+   hardware would cut off the product itself. */
+.product-intro {
+  max-width: 52ch;
+  color: rgba(var(--bone-rgb), 0.75);
+  margin-bottom: clamp(32px, 5vh, 56px);
 }
-#pipe-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
-
-/* the rail fills each diamond as it reaches it (class set from main.js) */
-.pipe-step.is-lit::before {
-  background: var(--acid);
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
 }
-
-.pipe-steps { list-style: none; display: flex; flex-direction: column; gap: clamp(48px, 8vh, 84px); }
-
-.pipe-step { position: relative; max-width: 46ch; }
-.pipe-step::before {
-  content: "";
-  position: absolute;
-  left: calc(-1 * clamp(28px, 5vw, 60px) - 0px);
-  top: 8px;
-  width: 20px; height: 20px;
-  border: 2px solid var(--acid);
-  background: var(--ink);
-  transform: translateX(-8px) rotate(45deg);
-  transition: background 0.35s ease;
+.product-card { display: flex; flex-direction: column; }
+.product-media {
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  background: var(--ink-2);
+  margin-bottom: 16px;
+  overflow: hidden;
 }
-.step-num { color: var(--acid); }
-.pipe-step h3 {
+.product-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.product-placeholder {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: rgba(var(--bone-rgb), 0.35);
+}
+.product-name {
   font-family: var(--display);
   font-weight: 750;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
   line-height: 1;
-  margin: 6px 0 10px;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
 }
-.pipe-step p { color: rgba(var(--bone-rgb), 0.7); }
+.product-detail { color: var(--dim); font-size: 0.95rem; }
+/* two-up once four cards would each drop below a legible width */
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* ===== SCENE 05 : NUMBERS ===== */
 .numbers { background: var(--ink-2); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
@@ -999,16 +1002,11 @@
   .clip-body h3 { font-size: 1.35rem; }
   .clip-body p { font-size: 0.9rem; }
 
-  /* --- pipeline --- */
-  .pipeline-intro { margin-bottom: 2.5rem; font-size: 0.95rem; }
-  .pipe { padding-left: 34px; }
-  .pipe-steps { gap: 36px; }
-  .pipe-step::before {
-    left: -34px; top: 6px;
-    width: 15px; height: 15px;
-  }
-  .pipe-step h3 { font-size: 1.6rem; }
-  .pipe-step p { font-size: 0.95rem; }
+  /* --- product design: stays two-up, just tighter --- */
+  .product-intro { margin-bottom: 1.6rem; font-size: 0.95rem; }
+  .product-grid { gap: 14px 12px; }
+  .product-name { font-size: 1.15rem; }
+  .product-detail { font-size: 0.85rem; }
 
   /* --- receipts / stats: single column reads better than cramped 2-up --- */
   .stat-grid { grid-template-columns: 1fr; }
