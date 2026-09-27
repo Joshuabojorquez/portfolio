@@ -166,10 +166,10 @@
 
     <!-- ===== SCENE 03 : PRODUCT DESIGN (hardware designed at BigBattery) ===== -->
     <!--
-      ▶ PHOTOS: each card has a .product-media slot holding a placeholder. Drop
-      the image into /assets, add its filename to the .gitignore allow-list, and
-      swap the placeholder <span> for
-        <img src="assets/FILE.jpg" alt="PRODUCT NAME" loading="lazy">
+      ▶ PHOTOS: assets/product-*.webp, cropped and compressed from the renders
+      in assets/Product Images/ (which stay untracked). Transparent backgrounds,
+      so they sit on the card tone in both themes. A new shot needs its filename
+      added to the .gitignore allow-list.
     -->
     <section class="scene product" id="scene-product" data-scene="SCENE 03 · PRODUCT DESIGN">
       <h2 class="scene-title"><span class="mono scene-num">03</span> PRODUCT DESIGN</h2>
@@ -177,22 +177,22 @@
         digital experiences that sell them.</p>
       <div class="product-grid">
         <article class="product-card">
-          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <div class="product-media"><img src="assets/product-nexus.webp" alt="NEXUS" loading="lazy" decoding="async"></div>
           <h3 class="product-name">NEXUS</h3>
           <p class="product-detail">14.3 kWh battery</p>
         </article>
         <article class="product-card">
-          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <div class="product-media"><img src="assets/product-nexus-2.webp" alt="NEXUS 2" loading="lazy" decoding="async"></div>
           <h3 class="product-name">NEXUS 2</h3>
           <p class="product-detail">16 kWh battery</p>
         </article>
         <article class="product-card">
-          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <div class="product-media"><img src="assets/product-apex-6.5k.webp" alt="APEX-6.5K" loading="lazy" decoding="async"></div>
           <h3 class="product-name">APEX-6.5K</h3>
           <p class="product-detail">Inverter</p>
         </article>
         <article class="product-card">
-          <div class="product-media"><span class="mono product-placeholder">PRODUCT PHOTO</span></div>
+          <div class="product-media"><img src="assets/product-apex-10k.webp" alt="APEX-10K" loading="lazy" decoding="async"></div>
           <h3 class="product-name">APEX-10K</h3>
           <p class="product-detail">Inverter</p>
         </article>

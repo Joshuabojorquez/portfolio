@@ -726,7 +726,16 @@
   margin-bottom: 16px;
   overflow: hidden;
 }
-.product-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* the renders are cropped tight to the product, so the breathing room lives
+   here: padding shrinks the content box that object-fit:contain fills */
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  box-sizing: border-box;
+  padding: 12%;
+}
 .product-placeholder {
   font-size: 0.6rem;
   letter-spacing: 0.14em;

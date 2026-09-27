@@ -1088,17 +1088,17 @@ if (window.gsap && !reduceMotion) {
    One scroll gesture moves one stop, instead of free-scrolling the whole page.
    The reader steps through the site rather than dragging a wheel through it.
 
-   Only the showcase is stepped: the hero, CASE STUDIES, PRODUCT DESIGN and the
-   video reel. The reel is the last stop, and from there down (Behind the Scenes,
-   the receipts, the credits) scrolling is free, because that stretch is reading
-   material rather than a set of beats.
+   Only the hero is stepped: its landing state and the skillset hold. The hold
+   is the last stop, and from there down (case studies, product design, the reel
+   and everything after) scrolling is free, so the reader browses the work at
+   their own pace rather than being marched through it one beat at a time.
 
    Stops are derived, not hard-coded:
      - the hero contributes two, the start of its pin and the end of it, so the
        name exit and the toolkit hold each get a stop of their own;
-     - every other section in the stepped run contributes one, unless its content
-       is taller than the viewport, in which case it is split into evenly spaced
-       stops.
+     - any other section added to the stepped run contributes one, unless its
+       content is taller than the viewport, in which case it is split into
+       evenly spaced stops.
 
    Left alone on phones (touch scrolling is already gesture-based and pinning
    is off there) and under prefers-reduced-motion, where the native scroll is
@@ -1114,7 +1114,7 @@ if (window.gsap && !reduceMotion) {
   const SPLIT_FRACTION = 0.45;   // excess content this deep gets its own stop
   /* the last stepped section. Its stop is the final one; everything below it
      scrolls freely. */
-  const LAST_STEPPED = "scene-reel";
+  const LAST_STEPPED = "scene-hero";
   const EDGE = 6;            // px of slack around the boundary
 
   let stops = [];
@@ -1243,7 +1243,7 @@ if (window.gsap && !reduceMotion) {
 
   /* Below the final stop the page is the reader's to scroll. Also true when
      sitting exactly on that stop and heading down, so a gesture there releases
-     into Behind the Scenes rather than snapping nowhere. */
+     into the case studies rather than snapping nowhere. */
   const isFree = (dir) => {
     const y = window.scrollY;
     const last = lastStopY();
