@@ -327,12 +327,31 @@ updateHud();
     hud.classList.remove("is-framing");
   }
 
+  /* Some targets move on hover (the case-study cards lift 8px). The rect read
+     on mouseenter is the pre-lift one, which left the brackets 2px off the top
+     edge and 18px off the bottom. Re-aim for a little longer than those hover
+     transitions run, so the brackets settle on where the element comes to
+     rest. Timer fallback: rAF is suspended in hidden tabs. */
+  const FOLLOW_MS = 650;
+  const nextFrame = (cb) =>
+    (document.hidden ? setTimeout(() => cb(performance.now()), 16) : requestAnimationFrame(cb));
+  function follow(el) {
+    const until = performance.now() + FOLLOW_MS;
+    const tick = (now) => {
+      if (framed !== el) return;       // left, or moved on to another target
+      frame(el);
+      if (now < until) nextFrame(tick);
+    };
+    nextFrame(tick);
+  }
+
   targets.forEach((el) => {
     el.addEventListener("mouseenter", () => {
       /* stepping sideways from one nav tab to the next → snap, don't glide */
       const instant = isNavTab(el) && isNavTab(framed);
       framed = el;
       frame(el, instant);
+      follow(el);
     });
     el.addEventListener("mouseleave", (e) => {
       /* Heading straight for another tab (or crossing the gap between two)?
@@ -345,10 +364,13 @@ updateHud();
       release();
     });
   });
-  /* keep the lock glued to the element while the page (or a carousel) scrolls */
-  window.addEventListener("scroll", () => { if (framed) frame(framed); }, { passive: true });
+  /* keep the lock glued to the element while the page (or a carousel) scrolls.
+     Instant, not eased: gliding after a moving target trails it by several px
+     for as long as the scroll lasts, which read as uneven spacing. */
+  const glue = () => { if (framed) frame(framed, true); };
+  window.addEventListener("scroll", glue, { passive: true });
   const wt = document.getElementById("work-track");
-  if (wt) wt.addEventListener("scroll", () => { if (framed) frame(framed); }, { passive: true });
+  if (wt) wt.addEventListener("scroll", glue, { passive: true });
 })();
 
 /* ---------- carousels: click-drag to scroll (shared by THE FOOTAGE and
@@ -448,11 +470,9 @@ const REEL_CLIPS = [
   const ADVANCE_MS = 7000;
   const N = REEL_CLIPS.length;
   let active = 0;
-  /* audible by default: the reel is the point of the page, so it arrives with
-     sound and the reader turns it off if they'd rather not. Browsers block
-     audible autoplay without a user gesture, so this can be forced back to
-     muted at runtime, see playActive(). */
-  let muted = false;
+  /* muted by default: sound is opt-in through the speaker button, and the
+     choice then persists across advances. Nothing unmutes on its own. */
+  let muted = true;
   let userMuted = false;   // set only by the toggle, so we never fight a choice
   let unlockArmed = false;
   let timer = null;
