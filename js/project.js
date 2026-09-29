@@ -47,3 +47,47 @@ if (!reduceMotion && "IntersectionObserver" in window) {
     io.observe(el);
   });
 }
+
+/* design-stage stepper: one sheet at a time, tabs double as the progress bar.
+   Auto-advances while on screen, pauses on hover or focus, and stays put under
+   reduced motion. Markup: [data-stepper] > .stepper-stage img + .stepper-tabs button */
+document.querySelectorAll("[data-stepper]").forEach((root) => {
+  const imgs = [...root.querySelectorAll(".stepper-stage img")];
+  const tabs = [...root.querySelectorAll(".stepper-tabs button")];
+  const caption = root.querySelector(".stepper-caption");
+  if (!imgs.length || imgs.length !== tabs.length) return;
+  const STEP_MS = 4200;
+  root.style.setProperty("--step-ms", STEP_MS + "ms");
+  let i = 0, timer = null, paused = false, visible = false;
+
+  const show = (n) => {
+    i = (n + imgs.length) % imgs.length;
+    imgs.forEach((im, k) => im.classList.toggle("is-on", k === i));
+    tabs.forEach((t, k) => {
+      /* restart the fill: drop the class, reflow, re-add */
+      t.classList.remove("is-on");
+      t.setAttribute("aria-selected", k === i ? "true" : "false");
+    });
+    void root.offsetWidth;
+    tabs[i].classList.add("is-on");
+    if (caption) caption.textContent = tabs[i].dataset.caption || "";
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    if (reduceMotion || paused || !visible) return;
+    timer = setTimeout(() => { show(i + 1); schedule(); }, STEP_MS);
+  };
+
+  tabs.forEach((t, k) => t.addEventListener("click", () => { show(k); schedule(); }));
+  root.addEventListener("mouseenter", () => { paused = true; root.classList.add("is-paused"); clearTimeout(timer); });
+  root.addEventListener("mouseleave", () => { paused = false; root.classList.remove("is-paused"); show(i); schedule(); });
+  root.addEventListener("focusin", () => { paused = true; clearTimeout(timer); });
+  root.addEventListener("focusout", () => { paused = false; schedule(); });
+  if (reduceMotion) root.classList.add("is-static");
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) show(i); schedule(); },
+      { threshold: 0.35 }).observe(root);
+  } else { visible = true; schedule(); }
+  show(0);
+});

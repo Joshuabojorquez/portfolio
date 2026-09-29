@@ -680,6 +680,34 @@
   position: absolute; inset: 0;
   background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.18) 3px 4px);
 }
+/* real stills: fill the frame, and skip the scanlines, which would only dim them */
+.clip-thumb.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip-thumb.has-img::after { display: none; }
+/* Launch Velocity has no screens yet, so its thumb is the value ladder itself:
+   four steps rising left to right, in the site's dark, precise direction */
+.thumb-ladder {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(120, 170, 255, 0.22) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    linear-gradient(135deg, #0b1220 0%, #0c0c0f 60%, #0d1a2e 100%);
+  align-items: flex-end;
+  gap: 6%;
+  padding: 0 8% 9%;
+}
+.thumb-ladder span {
+  flex: 1;
+  display: flex; align-items: flex-start;
+  padding: 10px;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: #cfe0ff;
+  border: 1px solid rgba(120, 170, 255, 0.45);
+  border-bottom: 0;
+  background: rgba(21, 80, 240, 0.12);
+}
+.thumb-ladder span:nth-child(1) { height: 28%; }
+.thumb-ladder span:nth-child(2) { height: 44%; }
+.thumb-ladder span:nth-child(3) { height: 60%; }
+.thumb-ladder span:nth-child(4) { height: 76%; background: rgba(21, 80, 240, 0.32); }
 
 .clip-body { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
 .clip-num { color: var(--acid); }
@@ -717,7 +745,12 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(16px, 2vw, 28px);
 }
-.product-card { display: flex; flex-direction: column; }
+.product-card { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
+/* each card opens its section of the NEXUS case study */
+.product-card .product-media img { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.product-card:hover .product-media img { transform: scale(1.04); }
+.product-card:hover .product-name { color: var(--acid); }
+.product-name { transition: color 0.25s ease; }
 .product-media {
   aspect-ratio: 4 / 5;
   display: grid;
@@ -1036,3 +1069,4 @@
     flex-direction: column; align-items: flex-start; gap: 6px;
   }
 }
+.product-intro-link { color: var(--acid); border-bottom: 1px solid currentColor; }

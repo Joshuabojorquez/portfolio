@@ -441,18 +441,18 @@ const REEL_CLIPS = [
     /* MEASURED, from the campaign report: 7-day boost, goal "get more website
        visitors". Ad spend deliberately not shown. */
     stats: { views: "7,613",  viewers: "4,881",  clicks: "301", landing: "233" } },
-  { src: "assets/nexus.mp4",          aspect: "tall", tag: "ORGANIC REEL",     href: "projects/launch-velocity.html",
+  { src: "assets/nexus.mp4",          aspect: "tall", tag: "ORGANIC REEL",     href: "projects/nexus-line.html",
     stats: { views: "9,240",  viewers: "6,410",  clicks: "372", landing: "288" } },
-  { src: "assets/ethos-hypershot.mp4",aspect: "tall", tag: "HYPERSHOT",        href: "projects/launch-velocity.html",
+  { src: "assets/ethos-hypershot.mp4",aspect: "tall", tag: "HYPERSHOT",        href: "projects/nexus-line.html#creative",
     stats: { views: "11,905", viewers: "8,730",  clicks: "468", landing: "362" } },
-  { src: "assets/ahc.mp4",            aspect: "tall", tag: "LAUNCH TEASER",    href: "projects/launch-velocity.html",
+  { src: "assets/ahc.mp4",            aspect: "tall", tag: "LAUNCH TEASER",    href: "projects/nexus-line.html#creative",
     stats: { views: "8,470",  viewers: "5,660",  clicks: "334", landing: "259" } },
-  { src: "assets/portfolio-reel.mp4", aspect: "tall", tag: "PORTFOLIO REEL",   href: "projects/launch-velocity.html",
+  { src: "assets/portfolio-reel.mp4", aspect: "tall", tag: "PORTFOLIO REEL",   href: "projects/nexus-line.html#creative",
     /* MEASURED, top of the reported range */
     stats: { views: "13,390", viewers: "10,372", clicks: "543", landing: "420" } },
-  { src: "assets/ethos-ad.mp4",       aspect: "wide", tag: "COMMERCIAL SPOT",  href: "projects/launch-velocity.html",
+  { src: "assets/ethos-ad.mp4",       aspect: "wide", tag: "COMMERCIAL SPOT",  href: "projects/nexus-line.html#creative",
     stats: { views: "10,180", viewers: "7,240",  clicks: "412", landing: "319" } },
-  { src: "assets/solar.mp4",          aspect: "wide", tag: "AD CAMPAIGN",      href: "projects/launch-velocity.html",
+  { src: "assets/solar.mp4",          aspect: "wide", tag: "AD CAMPAIGN",      href: "projects/nexus-line.html#creative",
     stats: { views: "12,460", viewers: "9,115",  clicks: "501", landing: "388" } },
 ];
 

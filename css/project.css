@@ -148,3 +148,172 @@
   padding-top: 20px; margin-top: 60px;
   border-top: 1px solid var(--hairline);
 }
+
+/* ---------- media: a still in the hero slot, or inline in a section ---------- */
+.case-media img { width: 100%; height: auto; display: block; }
+.case-figure { margin: 1.6rem 0 0; }
+.case-figure img, .case-figure video { width: 100%; height: auto; display: block; border: 1px solid var(--hairline); }
+.case-figure figcaption, .case-note {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 10px;
+}
+.case-note, .case-section .case-note { text-transform: none; color: var(--dim); letter-spacing: 0.04em; font-size: 0.72rem; line-height: 1.6; max-width: 70ch; }
+
+/* ---------- timeline: launch dates as one scannable row ---------- */
+.timeline {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  border-top: 1px solid var(--hairline);
+}
+.case-section .timeline li { padding: 18px 18px 0 0; position: relative; color: inherit; }
+.case-section .timeline li::before {
+  content: ""; position: absolute; top: -5px; left: 0;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--acid);
+}
+.timeline b { display: block; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; color: var(--acid); margin-bottom: 6px; }
+.timeline span { font-size: 0.95rem; color: rgba(var(--bone-rgb), 0.78); }
+
+/* ---------- process stepper: design stages, one sheet at a time ---------- */
+.stepper-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;              /* most sheets are portrait A4 */
+  background: #fff;                 /* the sheets are white documents */
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+.stepper-stage img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 3%;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.stepper-stage img.is-on { opacity: 1; }
+.stepper-tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 1px; background: var(--hairline); margin-top: 1px; }
+.stepper-tabs button {
+  background: var(--ink);
+  border: 0;
+  padding: 14px 12px;
+  text-align: left;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s ease;
+}
+.stepper-tabs button b { display: block; color: inherit; font-weight: 600; margin-bottom: 4px; }
+.stepper-tabs button::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: var(--acid); transform: scaleX(0); transform-origin: left;
+}
+.stepper-tabs button.is-on { color: var(--bone); }
+.stepper-tabs button.is-on::after { transform: scaleX(1); transition: transform var(--step-ms, 4200ms) linear; }
+.stepper.is-paused .stepper-tabs button.is-on::after,
+.stepper.is-static .stepper-tabs button.is-on::after { transition: none; }
+.stepper-caption { margin-top: 14px; }
+
+/* ---------- product blocks: one repeated layout so products compare ---------- */
+.product-block {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  scroll-margin-top: 90px;
+}
+.product-shot { background: var(--ink-2); aspect-ratio: 4 / 5; display: grid; place-items: center; }
+.product-shot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; box-sizing: border-box; }
+.product-shot.duo { grid-template-columns: 1fr 1fr; }
+.product-shot.duo img { padding: 14% 6%; }
+.product-block h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.product-kicker { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; color: var(--acid); display: block; margin-bottom: 1rem; }
+.product-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  margin-top: 1.4rem;
+}
+.product-facts div { background: var(--ink); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.product-facts b { font-family: var(--display); font-weight: 800; font-size: clamp(1.2rem, 2.2vw, 1.7rem); line-height: 1; }
+.product-facts span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+
+/* ---------- before / after: two renders, two budgets ---------- */
+.compare { display: grid; grid-template-columns: minmax(0, 16fr) minmax(0, 5.2fr); gap: clamp(16px, 2.4vw, 32px); align-items: end; }
+.compare figure { margin: 0; }
+.compare video { width: 100%; display: block; background: var(--ink-2); border: 1px solid var(--hairline); }
+.compare figcaption { margin-top: 12px; display: flex; flex-direction: column; gap: 4px; }
+.compare figcaption b { font-family: var(--display); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1; }
+.compare figcaption b.win { color: var(--acid); }
+.compare figcaption span { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+
+/* ---------- creative strip: a curated handful, scrolls sideways ---------- */
+.creative-strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 10px;
+  margin-top: 1.4rem;
+  scrollbar-width: thin;
+}
+.creative-strip > * {
+  flex: 0 0 auto;
+  height: clamp(180px, 26vw, 280px);
+  width: auto;
+  scroll-snap-align: start;
+  border: 1px solid var(--hairline);
+  display: block;
+}
+
+/* ---------- value ladder (Launch Velocity) ---------- */
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  gap: 8px;
+}
+/* each step outlined on its own: a shared hairline background would fill the
+   empty space above the lower steps and flatten the staircase */
+.ladder div {
+  border: 1px solid var(--hairline);
+  border-top: 2px solid var(--acid);
+  background: var(--ink);
+  padding: 18px 16px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+}
+.ladder div:nth-child(1) { min-height: 120px; }
+.ladder div:nth-child(2) { min-height: 160px; }
+.ladder div:nth-child(3) { min-height: 200px; }
+.ladder div:nth-child(4) { min-height: 240px; }
+.ladder div:nth-child(5) { min-height: 280px; background: var(--ink-2); }
+.ladder b { font-family: var(--display); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 2.1rem); line-height: 1; color: var(--acid); }
+.ladder span { font-size: 0.9rem; line-height: 1.35; color: rgba(var(--bone-rgb), 0.82); }
+.ladder i { font-style: normal; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+
+@media (max-width: 760px) {
+  .product-block { grid-template-columns: 1fr; }
+  .product-shot { aspect-ratio: 5 / 4; }
+  .compare { grid-template-columns: minmax(0, 16fr) minmax(0, 7fr); }
+  .ladder { grid-template-columns: 1fr; }
+  .ladder div { min-height: 0 !important; flex-direction: row; align-items: baseline; flex-wrap: wrap; }
+  .stepper-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stepper-stage { aspect-ratio: 4 / 5; }
+}
