@@ -256,9 +256,13 @@
 .product-facts span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
 
 /* ---------- before / after: two renders, two budgets ---------- */
-.compare { display: grid; grid-template-columns: minmax(0, 16fr) minmax(0, 5.2fr); gap: clamp(16px, 2.4vw, 32px); align-items: end; }
+/* 256:81 is what gives a 16:9 and a 9:16 clip the same height side by side
+   (the gap comes out before fr shares are split, so it stays exact) */
+.compare { display: grid; grid-template-columns: minmax(0, 256fr) minmax(0, 81fr); gap: clamp(16px, 2.4vw, 32px); align-items: end; }
 .compare figure { margin: 0; }
-.compare video { width: 100%; display: block; background: var(--ink-2); border: 1px solid var(--hairline); }
+/* outline, not border: a border adds to each clip's width and knocks the two
+   heights out of line by a couple of px */
+.compare video { width: 100%; display: block; background: var(--ink-2); outline: 1px solid var(--hairline); outline-offset: -1px; }
 .compare figcaption { margin-top: 12px; display: flex; flex-direction: column; gap: 4px; }
 .compare figcaption b { font-family: var(--display); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1; }
 .compare figcaption b.win { color: var(--acid); }
@@ -311,7 +315,9 @@
 @media (max-width: 760px) {
   .product-block { grid-template-columns: 1fr; }
   .product-shot { aspect-ratio: 5 / 4; }
-  .compare { grid-template-columns: minmax(0, 16fr) minmax(0, 7fr); }
+  /* at phone width the tall clip would shrink to ~80px, so stack instead */
+  .compare { grid-template-columns: 1fr; }
+  .compare figure:last-child video { width: 62%; }
   .ladder { grid-template-columns: 1fr; }
   .ladder div { min-height: 0 !important; flex-direction: row; align-items: baseline; flex-wrap: wrap; }
   .stepper-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
