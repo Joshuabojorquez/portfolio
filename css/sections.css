@@ -378,7 +378,6 @@
   margin-bottom: clamp(20px, 3vh, 40px);
 }
 .footage-head .scene-title { margin-bottom: 0; }
-.footage-hint { color: var(--dim); flex-shrink: 0; }
 
 .reel {
   /* trimmed from 62vh to 50vh: the stats row below now needs the height, and
@@ -579,7 +578,6 @@
     --reel-h: calc(var(--reel-card-w) * 16 / 9);
     padding: 8px 0 4px;
   }
-  .footage-hint { display: none; }
 
   .reel-card {
     height: auto;
