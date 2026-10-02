@@ -679,7 +679,7 @@
   background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.18) 3px 4px);
 }
 /* real stills: fill the frame, and skip the scanlines, which would only dim them */
-.clip-thumb.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip-thumb.has-img img, .clip-thumb.has-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .clip-thumb.has-img::after { display: none; }
 /* Launch Velocity has no screens yet, so its thumb is the value ladder itself:
    four steps rising left to right, in the site's dark, precise direction */

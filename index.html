@@ -114,7 +114,12 @@
       <div class="work-track" id="work-track">
 
           <a class="clip" href="projects/bigbattery.html" data-cursor="OPEN" data-hud-frame>
-            <div class="clip-thumb has-img"><img src="assets/case-bigbattery.webp" alt="" loading="lazy" decoding="async"></div>
+            <div class="clip-thumb has-img">
+              <!-- silent, looping motion cut of the ETHOS before/after and the Husky 2 app;
+                   plays only while on screen (data-autoplay-inview, see main.js) -->
+              <video src="assets/case-bigbattery-motion.mp4" poster="assets/case-bigbattery-motion-poster.webp"
+                     muted loop playsinline preload="none" data-autoplay-inview aria-hidden="true"></video>
+            </div>
             <div class="clip-body">
               <span class="mono clip-num">CASE 01 · UX/UI</span>
               <h3>BigBattery: Curing Analysis Paralysis</h3>
