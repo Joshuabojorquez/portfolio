@@ -45,7 +45,7 @@
       <p>BigBattery sells lithium storage into six verticals at once: residential, commercial,
          marine, RV, golf and off-grid. Half the buyers are electricians who want a spec sheet.
          The other half have never sized a battery bank in their life. The catalogue had grown to
-         <strong>180 product pages</strong> serving both, and it was buckling under itself.</p>
+         <strong>180+ product pages</strong> serving both, and it was buckling under itself.</p>
       <p>Capacity variants each had their own page, so eight listings competed for the same search
          term and diluted the authority of all eight. Product pages bounced at
          <strong>53.3%</strong>. Seven in ten carts were abandoned at the final step. In an
@@ -59,11 +59,18 @@
 
     <section class="case-section">
       <h2>Phase 01 / Find the real failure</h2>
-      <p>I wanted the diagnosis to come from behaviour, not opinion, so I triangulated four
-         sources before touching a wireframe.</p>
+      <div class="case-split">
+      <div>
+      <p>I wanted the diagnosis to come from evidence, not opinion, so I triangulated behaviour,
+         attribution and the customer's own words before touching a wireframe.</p>
       <ul>
         <li><strong>931 Hotjar sessions.</strong> Recordings showed a consistent shape: land,
-            scroll straight past the spec table, never reach a CTA.</li>
+            scroll straight past the spec table, never reach a CTA. Bounce sat at 53.3%, and the
+            plan only sampled 17% of traffic, so Microsoft Clarity came in to capture every
+            session, with heatmaps and quick-back tracking.</li>
+        <li><strong>Triple Whale attribution</strong> traced where every customer came from
+            (organic search and SEO rankings, Meta and Google ads, backlinks, Klaviyo email)
+            against a 5.82 blended ROAS, and flagged new-customer acquisition cost climbing 31%.</li>
         <li><strong>850-respondent survey</strong>, mixed methods, splitting "couldn't find it"
             (44%) from "couldn't understand it" (47%), which are two different fixes.</li>
         <li><strong>Stakeholder interviews</strong> with the CEO and the sales team, who named
@@ -74,15 +81,30 @@
       </ul>
       <p>The conclusion was that the site was organised around BigBattery's internal taxonomy
          and a buyer's mental model starts somewhere else entirely: with the job.</p>
+      </div>
+      <figure class="case-split-media">
+        <video src="../assets/case-bb-diagnosis.mp4" poster="../assets/case-bb-diagnosis-poster.webp"
+               muted loop playsinline preload="none" data-autoplay-inview
+               aria-label="Motion walkthrough: Hotjar concerns, Triple Whale attribution, and Microsoft Clarity then versus now"></video>
+        <figcaption>Hotjar and Triple Whale at the start, then Clarity: six months vs. one month now</figcaption>
+      </figure>
+      </div>
     </section>
 
     <section class="case-section">
       <h2>Phase 02 / Collapse the catalogue</h2>
+      <div class="case-split">
+      <div>
       <p>Consolidation came first, because every later decision multiplied across however many
-         pages existed. <strong>180 pages became 30.</strong> Capacity variants that had each held
-         their own URL folded into a single parent page with a quantity selector, which turned a
-         multi-tab comparison into an on-page one and pointed all that scattered SEO authority at
-         one target.</p>
+         pages existed. Near-duplicate listings were competing with each other for the same search
+         term and the same buyer, so I restructured the catalogue around one parent page per
+         product family, with configurations selected inline. <strong>180+ pages became 30.</strong>
+         SEO authority consolidated, and buyers stopped guessing which listing was the real one.</p>
+      <p>In Figma I mapped the catalogue page by page: which listings differed by nothing but
+         battery quantity, and which kit page each one would fold into. That map became the System
+         Configuration Modal. A buyer swaps the inverter or the battery in place instead of waiting
+         for a new page to load on every click, so the site feels faster and more responsive, and
+         the whole product base reads as one connected system at a glance.</p>
       <p>Navigation was rebuilt around application entry points rather than internal categories,
          and product families gained dual-application tagging after testing surfaced a real gap:
          hardware suited to both grid-tied and off-grid use was invisible in either single-category
@@ -91,6 +113,14 @@
          selector, a combined battery-and-inverter page, grid and off-grid segmentation, and a
          restructured below-fold, before V6 shipped in December 2025 carrying multiple inverter and
          battery configurations on one parent page.</p>
+      </div>
+      <figure class="case-split-media">
+        <video src="../assets/case-bb-consolidation.mp4" poster="../assets/case-bb-consolidation-poster.webp"
+               muted loop playsinline preload="none" data-autoplay-inview
+               aria-label="Motion walkthrough: near-duplicate product pages collapsing into one, the new product page, and the System Configuration Modal"></video>
+        <figcaption>From the Figma consolidation map to the shipped product page and modal</figcaption>
+      </figure>
+      </div>
     </section>
 
     <section class="case-section">
@@ -148,7 +178,7 @@
     <section class="case-section">
       <h2>The Results</h2>
       <div class="case-results">
-        <div class="r"><b>180 → 30</b><span>Product pages, an 81% reduction</span></div>
+        <div class="r"><b>180+ → 30</b><span>Product pages, an 83% reduction</span></div>
         <div class="r"><b>+75%</b><span>Organic traffic after consolidation</span></div>
         <div class="r"><b>+28%</b><span>Product page conversion, HYROS verified</span></div>
         <div class="r"><b>70% → 40%</b><span>Checkout abandonment</span></div>
@@ -168,15 +198,17 @@
       <div class="toolkit">
         <div><h3>RESEARCH</h3><ul>
           <li><b>Hotjar</b><span>931 session recordings of the browse and checkout path</span></li>
+          <li><b>Microsoft Clarity</b><span>Full-traffic recordings, heatmaps and quick backs</span></li>
           <li><b>Customer survey</b><span>850 respondents, mixed methods</span></li>
           <li><b>Sales call logs</b><span>The questions buyers asked before they bought</span></li>
         </ul></div>
         <div><h3>DESIGN</h3><ul>
           <li><b>Figma</b><span>Variables and a documented design system</span></li>
-          <li><b>Information architecture</b><span>180 product pages consolidated into 30</span></li>
+          <li><b>Information architecture</b><span>180+ product pages consolidated into 30</span></li>
         </ul></div>
         <div><h3>MEASUREMENT</h3><ul>
           <li><b>HYROS</b><span>Attribution for conversion and revenue</span></li>
+          <li><b>Triple Whale</b><span>Traffic by source, ROAS and acquisition cost</span></li>
           <li><b>Hotjar</b><span>Post-launch recordings to confirm the fix held</span></li>
         </ul></div>
       </div>

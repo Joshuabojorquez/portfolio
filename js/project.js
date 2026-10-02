@@ -91,3 +91,17 @@ document.querySelectorAll("[data-stepper]").forEach((root) => {
   } else { visible = true; schedule(); }
   show(0);
 });
+
+/* clips marked data-autoplay-inview play only while on screen */
+const inviewClips = document.querySelectorAll("video[data-autoplay-inview]");
+if (inviewClips.length) {
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    inviewClips.forEach((v) => { v.preload = "metadata"; });
+  } else {
+    const vio = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause();
+    }), { threshold: 0.25 });
+    inviewClips.forEach((v) => vio.observe(v));
+  }
+}
